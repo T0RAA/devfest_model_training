@@ -1,4 +1,4 @@
-"""iNaturalist pilot API collector and Open Data metadata query builder."""
+"""iNaturalist API collector and AWS S3 Open Data TSV DuckDB query builder (v2 §3.1 & §4)."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ from typing import Any, Callable, Dict, List, Optional, Set, Tuple
 import urllib.error
 import urllib.parse
 import urllib.request
+import yaml
 
 from wildlife.data.licenses import ALLOWED_PHOTO_LICENSES, normalize_license_code
 from wildlife.schemas import SpeciesRecord, load_species_taxonomy
@@ -16,6 +17,7 @@ from wildlife.schemas import SpeciesRecord, load_species_taxonomy
 SCHEME = "https"
 INAT_HOST = "api.inaturalist.org"
 INAT_WEB_HOST = "www.inaturalist.org"
+INAT_S3_HOST = "inaturalist-open-data.s3.amazonaws.com"
 BASE = f"{SCHEME}://{INAT_HOST}/v1/observations"
 
 
@@ -23,9 +25,10 @@ def get_pilot_observations(
     scientific_name: str,
     pages: int = 1,
     per_page: int = 200,
+    place_id: Optional[int] = None,
     allowed_licenses: Set[str] = ALLOWED_PHOTO_LICENSES,
-    user_agent: str = "UCSC-Wildlife-Vision/1.0 (academic project)",
-    rate_limit_sec: float = 1.1,
+    user_agent: str = "UCSC-Wildlife-Vision/2.1 (academic project)",
+    rate_limit_sec: float = 1.05,
     max_retries: int = 3,
     checkpoint_path: Optional[Path] = None,
     http_get_json: Optional[Callable[[str, Dict[str, str]], Dict[str, Any]]] = None,
@@ -57,15 +60,18 @@ def get_pilot_observations(
     fetch_fn = http_get_json or _default_fetch
 
     for page in range(1, pages + 1):
-        params = urllib.parse.urlencode(
-            {
-                "taxon_name": scientific_name,
-                "quality_grade": "research",
-                "photos": "true",
-                "per_page": per_page,
-                "page": page,
-            }
-        )
+        query_dict: Dict[str, Any] = {
+            "taxon_name": scientific_name,
+            "quality_grade": "research",
+            "photos": "true",
+            "photo_license": "cc0,cc-by",
+            "per_page": per_page,
+            "page": page,
+        }
+        if place_id is not None:
+            query_dict["place_id"] = int(place_id)
+
+        params = urllib.parse.urlencode(query_dict)
         url = f"{BASE}?{params}"
         payload = fetch_fn(url, headers)
 
@@ -79,12 +85,13 @@ def get_pilot_observations(
 
             user = obs.get("user") or {}
             observer_id = str(user.get("id") or obs.get("user_id") or "unknown")
-            photographer = str(
-                user.get("name") or user.get("login") or f"observer_{observer_id}"
-            )
+            observer_login = str(user.get("login") or f"observer_{observer_id}")
+            photographer = str(user.get("name") or observer_login)
             observed_on = str(obs.get("observed_on") or "2026-01-01")
+            pos_acc = obs.get("positional_accuracy")
+            obs_place_ids = obs.get("place_ids") or []
 
-            for photo in obs.get("photos", []):
+            for photo_idx, photo in enumerate(obs.get("photos", [])):
                 lic = normalize_license_code(photo.get("license_code"))
                 if lic not in allowed_licenses:
                     continue
@@ -92,19 +99,41 @@ def get_pilot_observations(
                 if pid in seen_photo_ids:
                     continue
                 seen_photo_ids.add(pid)
+                orig_dims = photo.get("original_dimensions") or {}
+                w = int(orig_dims.get("width") or 1024)
+                h = int(orig_dims.get("height") or 768)
+                raw_url = str(photo.get("url") or "")
+                ext = "jpg"
+                if ".png" in raw_url.lower():
+                    ext = "png"
+                large_url = (
+                    raw_url.replace("square.", "large.")
+                    if "square." in raw_url
+                    else f"{SCHEME}://{INAT_S3_HOST}/photos/{pid}/large.{ext}"
+                )
                 rows.append(
                     {
                         "observation_id": str(obs["id"]),
                         "observer_id": observer_id,
+                        "observer_login": observer_login,
                         "photo_id": pid,
+                        "photo_rank_in_obs": photo_idx,
                         "scientific_name": scientific_name,
                         "taxon_id": int(taxon.get("id") or 0),
                         "photo_license": lic,
                         "photographer_credit": photographer,
                         "date_observed": observed_on,
-                        "source_dataset": "inaturalist_pilot_api",
+                        "positional_accuracy": pos_acc,
+                        "extension": ext,
+                        "width": w,
+                        "height": h,
+                        "is_campus_place": bool(
+                            3519 in obs_place_ids or 94596 in obs_place_ids
+                        ),
+                        "source_dataset": "inat_open_data",
+                        "label_source": "inat_research_grade",
                         "source_url": f"{SCHEME}://{INAT_WEB_HOST}/photos/{pid}",
-                        "image_url": photo.get("url"),
+                        "image_url": large_url,
                     }
                 )
 
@@ -120,33 +149,103 @@ def get_pilot_observations(
 
 def build_s3_open_data_duckdb_query(
     species_records: Optional[List[SpeciesRecord]] = None,
-    metadata_dir: str = "inaturalist-open-data/metadata",
+    extracted_metadata_dir: str = "/content/meta",
     california_bbox: Tuple[float, float, float, float] = (32.5, -124.5, 42.0, -114.1),
+    ood_taxa_path: Optional[Path] = None,
 ) -> str:
-    """Generate a reproducible DuckDB SQL query over iNaturalist Open Data metadata tables."""
+    """Generate the fixed v2 DuckDB SQL query over extracted iNaturalist Open Data TSVs (§3.1 & §4.3).
+
+    Fixes v1 bug:
+    - Points to extracted tarball TSV files (`observations.csv.gz`, `photos.csv.gz`, `taxa.csv.gz`, `observers.csv.gz`).
+    - Explicitly uses `read_csv(..., delim='\\t', header=true)`.
+    - Selects `p.extension`, `p.width`, `p.height`, `o.positional_accuracy`, and `obs.login`/`obs.name` for attribution.
+    - Generates `large.{extension}` S3 URLs.
+    """
     records = species_records or load_species_taxonomy()
-    taxon_ids = ", ".join(str(r.taxon_id) for r in records)
+    target_taxon_ids = ", ".join(str(r.taxon_id) for r in records)
     lat_min, lon_min, lat_max, lon_max = california_bbox
-    return f"""-- Reproducible iNaturalist Open Data metadata scan (CC0 / CC-BY only)
-SELECT
-    o.observation_uuid AS observation_id,
-    o.observer_id,
-    p.photo_id,
-    p.photo_uuid,
-    LOWER(p.license) AS photo_license,
-    t.name AS scientific_name,
-    t.taxon_id,
-    o.observed_on AS date_observed,
-    o.latitude,
-    o.longitude
-FROM read_csv_auto('{metadata_dir}/observations.csv.gz') AS o
-JOIN read_csv_auto('{metadata_dir}/photos.csv.gz') AS p
-  ON o.observation_uuid = p.observation_uuid
-JOIN read_csv_auto('{metadata_dir}/taxa.csv.gz') AS t
-  ON o.taxon_id = t.taxon_id
-WHERE o.quality_grade = 'research'
-  AND LOWER(p.license) IN ('cc0', 'cc-by')
-  AND t.taxon_id IN ({taxon_ids})
-  AND o.latitude BETWEEN {lat_min} AND {lat_max}
-  AND o.longitude BETWEEN {lon_min} AND {lon_max};
+
+    ood_ids_list: List[str] = []
+    if ood_taxa_path and Path(ood_taxa_path).exists():
+        raw_ood = yaml.safe_load(Path(ood_taxa_path).read_text(encoding="utf-8"))
+        ood_ids_list = [str(item["taxon_id"]) for item in raw_ood.get("ood_taxa", [])]
+    ood_taxon_ids = ", ".join(ood_ids_list) if ood_ids_list else "47144, 118552, 8021"
+
+    return f"""-- UCSC Wildlife Vision v2 — Reproducible iNaturalist Open Data TSV Scan (CC0 / CC-BY only)
+-- Prerequisite: extract s3://inaturalist-open-data/metadata/inaturalist-open-data-latest.tar.gz into {extracted_metadata_dir}/
+
+-- Query 1: 20 Target Species Candidates (California default bounding box)
+COPY (
+    SELECT
+        o.observation_uuid AS observation_id,
+        o.observer_id,
+        obs.login AS observer_login,
+        COALESCE(NULLIF(obs.name, ''), obs.login) AS photographer_credit,
+        p.photo_id,
+        p.photo_uuid,
+        p.extension,
+        p.width,
+        p.height,
+        LOWER(p.license) AS photo_license,
+        t.name AS scientific_name,
+        t.taxon_id,
+        o.observed_on AS date_observed,
+        o.positional_accuracy,
+        o.latitude,
+        o.longitude,
+        FALSE AS is_ood,
+        '' AS ood_group,
+        CONCAT('{SCHEME}://{INAT_S3_HOST}/photos/', p.photo_id, '/large.', p.extension) AS large_image_url
+    FROM read_csv('{extracted_metadata_dir}/observations.csv.gz', delim='\\t', header=true) AS o
+    JOIN read_csv('{extracted_metadata_dir}/photos.csv.gz', delim='\\t', header=true) AS p
+      ON o.observation_uuid = p.observation_uuid
+    JOIN read_csv('{extracted_metadata_dir}/taxa.csv.gz', delim='\\t', header=true) AS t
+      ON o.taxon_id = t.taxon_id
+    LEFT JOIN read_csv('{extracted_metadata_dir}/observers.csv.gz', delim='\\t', header=true) AS obs
+      ON o.observer_id = obs.observer_id
+    WHERE o.quality_grade = 'research'
+      AND LOWER(p.license) IN ('cc0', 'cc-by')
+      AND t.taxon_id IN ({target_taxon_ids})
+      AND p.width >= 256
+      AND p.height >= 256
+      AND o.latitude BETWEEN {lat_min} AND {lat_max}
+      AND o.longitude BETWEEN {lon_min} AND {lon_max}
+) TO 'data/manifests/inat_candidates.parquet' (FORMAT PARQUET);
+
+-- Query 2: Resolved Hard-Negative OOD Taxa Candidates (configs/ood_taxa.yaml)
+COPY (
+    SELECT
+        o.observation_uuid AS observation_id,
+        o.observer_id,
+        obs.login AS observer_login,
+        COALESCE(NULLIF(obs.name, ''), obs.login) AS photographer_credit,
+        p.photo_id,
+        p.photo_uuid,
+        p.extension,
+        p.width,
+        p.height,
+        LOWER(p.license) AS photo_license,
+        t.name AS scientific_name,
+        t.taxon_id,
+        o.observed_on AS date_observed,
+        o.positional_accuracy,
+        o.latitude,
+        o.longitude,
+        TRUE AS is_ood,
+        CONCAT('{SCHEME}://{INAT_S3_HOST}/photos/', p.photo_id, '/large.', p.extension) AS large_image_url
+    FROM read_csv('{extracted_metadata_dir}/observations.csv.gz', delim='\\t', header=true) AS o
+    JOIN read_csv('{extracted_metadata_dir}/photos.csv.gz', delim='\\t', header=true) AS p
+      ON o.observation_uuid = p.observation_uuid
+    JOIN read_csv('{extracted_metadata_dir}/taxa.csv.gz', delim='\\t', header=true) AS t
+      ON o.taxon_id = t.taxon_id
+    LEFT JOIN read_csv('{extracted_metadata_dir}/observers.csv.gz', delim='\\t', header=true) AS obs
+      ON o.observer_id = obs.observer_id
+    WHERE o.quality_grade = 'research'
+      AND LOWER(p.license) IN ('cc0', 'cc-by')
+      AND t.taxon_id IN ({ood_taxon_ids})
+      AND p.width >= 256
+      AND p.height >= 256
+      AND o.latitude BETWEEN {lat_min} AND {lat_max}
+      AND o.longitude BETWEEN {lon_min} AND {lon_max}
+) TO 'data/manifests/inat_ood_candidates.parquet' (FORMAT PARQUET);
 """

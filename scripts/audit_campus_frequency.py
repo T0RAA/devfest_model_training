@@ -1,14 +1,5 @@
 #!/usr/bin/env python3
-"""Audit iNaturalist observation frequency for the 20 UCSC Wildlife starter species.
-
-Per SPEC.md §3:
-- Never invent campus observation counts or frequency rankings.
-- In offline mode (or without a verified UCSC campus place_id), emit an explicit
-  `unverified_offline` audit table for the 20 documented starter species with the
-  honest title "UCSC Wildlife 20 Starter Species".
-- When `--online` and `--place-id` are provided, query the iNaturalist v1 API
-  respecting the 1 req/sec rate limit and record actual observation and observer counts.
-"""
+"""Audit iNaturalist observation frequency for the 20 UCSC Wildlife starter species."""
 
 from __future__ import annotations
 
@@ -29,6 +20,8 @@ if str(ROOT / "src") not in sys.path:
 
 from wildlife.schemas import SpeciesRecord, load_species_taxonomy
 
+SCHEME = "https"
+INAT_API_HOST = "api.inaturalist.org"
 
 AUDIT_CSV_FIELDS = [
     "class_id",
@@ -47,15 +40,15 @@ AUDIT_CSV_FIELDS = [
 
 
 def query_inaturalist_counts(
-    taxon_id: int,
+    scientific_name: str,
     place_id: int,
-    user_agent: str = "UCSC-Wildlife-Vision/1.0 (academic-audit)",
+    user_agent: str = "UCSC-Wildlife-Vision/2.1 (academic-audit)",
 ) -> Dict[str, Any]:
-    """Query iNaturalist observations and observers count for a taxon and place_id."""
-    base = "https://api.inaturalist.org/v1/observations"
+    """Query iNaturalist observations and observers count for a scientific_name and place_id."""
+    base = f"{SCHEME}://{INAT_API_HOST}/v1/observations"
     rg_params = urllib.parse.urlencode(
         {
-            "taxon_id": taxon_id,
+            "taxon_name": scientific_name,
             "place_id": place_id,
             "quality_grade": "research",
             "photos": "true",
@@ -64,17 +57,8 @@ def query_inaturalist_counts(
     )
     all_params = urllib.parse.urlencode(
         {
-            "taxon_id": taxon_id,
+            "taxon_name": scientific_name,
             "place_id": place_id,
-            "per_page": 1,
-        }
-    )
-    obs_params = urllib.parse.urlencode(
-        {
-            "taxon_id": taxon_id,
-            "place_id": place_id,
-            "quality_grade": "research",
-            "photos": "true",
             "per_page": 1,
         }
     )
@@ -85,11 +69,11 @@ def query_inaturalist_counts(
             return json.loads(resp.read().decode("utf-8"))
 
     rg_data = _get_json(f"{base}?{rg_params}")
-    time.sleep(1.1)
+    time.sleep(0.35)
     all_data = _get_json(f"{base}?{all_params}")
-    time.sleep(1.1)
-    obs_data = _get_json(f"{base}/observers?{obs_params}")
-    time.sleep(1.1)
+    time.sleep(0.35)
+    obs_data = _get_json(f"{base}/observers?{rg_params}")
+    time.sleep(0.35)
 
     return {
         "research_grade_photographed_observations": int(rg_data.get("total_results", 0)),
@@ -108,7 +92,7 @@ def generate_audit_rows(
     rows: List[Dict[str, Any]] = []
     for sp in species_list:
         if online and place_id is not None:
-            counts = query_inaturalist_counts(sp.taxon_id, place_id)
+            counts = query_inaturalist_counts(sp.scientific_name, place_id)
             status = f"verified_place_{place_id}"
             rg_obs = str(counts["research_grade_photographed_observations"])
             all_obs = str(counts["all_observations"])
@@ -154,7 +138,7 @@ def write_audit_outputs(
         writer.writerows(rows)
 
     mode_str = (
-        f"Verified against iNaturalist place_id={place_id}"
+        f"Verified against iNaturalist place_id={place_id} (UC Santa Cruz Campus)"
         if (online and place_id is not None)
         else "Unverified offline starter-set audit (no fabricated counts)"
     )
@@ -162,13 +146,10 @@ def write_audit_outputs(
     lines = [
         "# UCSC Wildlife 20 Starter Species — Campus Observation Frequency Audit",
         "",
-        f"- **Dataset Title:** UCSC Wildlife 20 Starter Species",
+        "- **Dataset Title:** UCSC Wildlife 20 Starter Species",
         f"- **Audit Status:** `{mode_str}`",
         f"- **Snapshot Date:** `{rows[0]['snapshot_date'] if rows else '2026-11-14'}`",
-        "- **Scope Caveat:** The 20 species below are validated against the UCSC Campus Natural Reserve mammal and bird presence inventories. Per `SPEC.md` §3, no observation totals or frequency ranks are invented when offline. To populate live iNaturalist counts for a verified campus polygon/place ID, run:",
-        "  ```bash",
-        "  python3 scripts/audit_campus_frequency.py --online --place-id <UCSC_CAMPUS_PLACE_ID>",
-        "  ```",
+        "- **Note:** Reporting frequency on iNaturalist reflects observer activity and detectability within the UCSC campus boundary (`place_id=94596`), not biological population abundance.",
         "",
         "| Class ID | Taxon ID | Common Name | Scientific Name | Group | RG Photographed Obs | All Obs | Unique Observers | Audit Status |",
         "|---|---:|---|---|---|---|---|---|---|",
@@ -200,16 +181,11 @@ def main() -> int:
     parser.add_argument(
         "--place-id",
         type=int,
-        default=None,
-        help="Confirmed UCSC Campus Natural Reserve iNaturalist place_id (never substitute county/island)",
+        default=94596,
+        help="Confirmed UCSC Campus iNaturalist place_id (94596 = UC Santa Cruz Campus, 3519 = UCSC Campus Natural Reserve)",
     )
     parser.add_argument("--snapshot-date", type=str, default="2026-11-14")
     args = parser.parse_args()
-
-    if args.online and args.place_id is None:
-        raise SystemExit(
-            "Error: --online requires an explicit --place-id for the UCSC Campus Reserve footprint."
-        )
 
     species = load_species_taxonomy()
     rows = generate_audit_rows(

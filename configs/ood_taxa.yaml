@@ -1,0 +1,129 @@
+version: "2.1.0"
+resolved_via: "api.inaturalist.org/v1/taxa"
+resolved_date: "2026-11-14"
+ucsc_campus_reserve_place_id: 3519
+ucsc_campus_broad_place_id: 94596
+
+# Disjoint OOD taxon groups: a taxon never appears in both ood_tune and ood_test (§3.3)
+ood_taxa:
+  - scientific_name: "Sciurus niger"
+    common_name: "Eastern fox squirrel"
+    taxon_id: 46020
+    confuses_with: ["M08", "M09"]
+    ood_group: "ood_tune"
+
+  - scientific_name: "Tamiasciurus douglasii"
+    common_name: "Douglas squirrel"
+    taxon_id: 46259
+    confuses_with: ["M08", "M09"]
+    ood_group: "ood_test"
+
+  - scientific_name: "Sylvilagus audubonii"
+    common_name: "Desert cottontail"
+    taxon_id: 43115
+    confuses_with: ["M10"]
+    ood_group: "ood_tune"
+
+  - scientific_name: "Lepus californicus"
+    common_name: "Black-tailed jackrabbit"
+    taxon_id: 43130
+    confuses_with: ["M10"]
+    ood_group: "ood_test"
+
+  - scientific_name: "Vulpes vulpes"
+    common_name: "Red fox"
+    taxon_id: 42069
+    confuses_with: ["M04", "M02"]
+    ood_group: "ood_tune"
+
+  - scientific_name: "Canis familiaris"
+    common_name: "Domestic dog"
+    taxon_id: 47144
+    confuses_with: ["M02", "M04"]
+    ood_group: "ood_test"
+
+  - scientific_name: "Felis catus"
+    common_name: "Domestic cat"
+    taxon_id: 118552
+    confuses_with: ["M03"]
+    ood_group: "ood_tune"
+
+  - scientific_name: "Puma concolor"
+    common_name: "Mountain lion"
+    taxon_id: 42007
+    confuses_with: ["M03"]
+    ood_group: "ood_test"
+
+  - scientific_name: "Didelphis virginiana"
+    common_name: "Virginia opossum"
+    taxon_id: 42652
+    confuses_with: ["M05", "M06"]
+    ood_group: "ood_tune"
+
+  - scientific_name: "Corvus brachyrhynchos"
+    common_name: "American crow"
+    taxon_id: 8021
+    confuses_with: ["B05"]
+    ood_group: "ood_test"
+
+  - scientific_name: "Aphelocoma woodhouseii"
+    common_name: "Woodhouse's scrub-jay"
+    taxon_id: 506117
+    confuses_with: ["B03", "B04"]
+    ood_group: "ood_tune"
+
+  - scientific_name: "Cyanocitta cristata"
+    common_name: "Blue jay"
+    taxon_id: 8229
+    confuses_with: ["B03", "B04"]
+    ood_group: "ood_test"
+
+  - scientific_name: "Selasphorus sasin"
+    common_name: "Allen's hummingbird"
+    taxon_id: 6359
+    confuses_with: ["B07"]
+    ood_group: "ood_tune"
+
+  - scientific_name: "Melozone crissalis"
+    common_name: "California towhee"
+    taxon_id: 73044
+    confuses_with: ["B10"]
+    ood_group: "ood_test"
+
+  - scientific_name: "Dryobates nuttallii"
+    common_name: "Nuttall's woodpecker"
+    taxon_id: 792987
+    confuses_with: ["B06"]
+    ood_group: "ood_tune"
+
+  - scientific_name: "Colaptes auratus"
+    common_name: "Northern flicker"
+    taxon_id: 18236
+    confuses_with: ["B06"]
+    ood_group: "ood_test"
+
+  - scientific_name: "Catharus guttatus"
+    common_name: "Hermit thrush"
+    taxon_id: 12890
+    confuses_with: ["B08"]
+    ood_group: "ood_tune"
+
+  - scientific_name: "Ixoreus naevius"
+    common_name: "Varied thrush"
+    taxon_id: 145088
+    confuses_with: ["B08"]
+    ood_group: "ood_test"
+
+  - scientific_name: "Melospiza melodia"
+    common_name: "Song sparrow"
+    taxon_id: 9100
+    confuses_with: ["B09"]
+    ood_group: "ood_tune"
+
+non_animal_ood_sources:
+  - source_dataset: "lila_cct_empty"
+    description: "Caltech Camera Traps empty frames (cdla-permissive-1.0, detector/OOD eval)"
+    ood_group: "ood_tune"
+  - source_dataset: "inat_plants_landscapes"
+    description: "CC0/CC-BY California plant and landscape frames"
+    ood_group: "ood_test"

@@ -2,6 +2,12 @@ allowed_photo_licenses:
   - "cc0"
   - "cc-by"
 
+# Decision D1 (Resolved): CDLA-Permissive-1.0 is allowed ONLY for detector fine-tuning
+# and detector evaluation, NEVER in classifier training manifests.
+detector_only_licenses:
+  - "cdla-permissive-1.0"
+  - "cdla-permissive"
+
 disallowed_commercial_licenses:
   - "cc-by-nc"
   - "cc-by-nc-sa"
@@ -16,7 +22,7 @@ inaturalist_api:
   host: "api.inaturalist.org"
   api_version: "v1"
   web_host: "www.inaturalist.org"
-  user_agent: "UCSC-Wildlife-Vision/1.0 (academic project)"
+  user_agent: "UCSC-Wildlife-Vision/2.1 (academic project)"
   requests_per_second: 1.0
   max_requests_per_day: 10000
   max_media_gb_per_hour: 5.0
@@ -29,33 +35,61 @@ sources:
     path: "/species-habitats/mammals/"
     purpose: "Validate mammal class list; not a training-image set"
     commercial_training_allowed: false
+    detector_training_allowed: false
   ucsc_bird_inventory:
     domain: "ucsccampusreserve.ucsc.edu"
     path: "/species-habitats/birds/"
     purpose: "Validate bird class list; not a training-image set"
     commercial_training_allowed: false
+    detector_training_allowed: false
   ucsc_inaturalist_checklist:
     domain: "www.inaturalist.org"
     path: "/check_lists/6494-UC-Santa-Cruz-Campus-Natural-Reserve-Check-List"
     purpose: "Cross-check taxonomy and local observations; not a frequency ranking"
     commercial_training_allowed: false
+    detector_training_allowed: false
   inaturalist_observations:
     domain: "www.inaturalist.org"
     path: "/observations"
     purpose: "Small pilot / campus-specific sample; obey rate limits and individual photo license"
     commercial_training_allowed: true
+    detector_training_allowed: true
   inaturalist_open_data:
     s3_bucket: "inaturalist-open-data"
+    s3_region: "us-east-1"
+    metadata_archive: "inaturalist-open-data-latest.tar.gz"
+    image_size_tier: "large"
     purpose: "Primary scalable image dataset; filter by scientific name, region, and photo license"
     commercial_training_allowed: true
+    detector_training_allowed: true
+  lila_cct:
+    dataset_id: "caltech_camera_traps"
+    license: "cdla-permissive-1.0"
+    purpose: "Detector bounding-box evaluation & optional fine-tuning + empty frames (Decision D1)"
+    commercial_training_allowed: false
+    detector_training_allowed: true
+  lila_ena24:
+    dataset_id: "ena24_detection"
+    license: "cdla-permissive-1.0"
+    purpose: "Detector bounding-box evaluation & optional fine-tuning (Decision D1)"
+    commercial_training_allowed: false
+    detector_training_allowed: true
+  lila_channel_islands:
+    dataset_id: "channel_islands_camera_traps"
+    license: "cdla-permissive-1.0"
+    purpose: "Detector bounding-box evaluation & optional fine-tuning (Decision D1)"
+    commercial_training_allowed: false
+    detector_training_allowed: true
   cub_200_2011:
     dataset_id: "cub_200_2011"
     purpose: "Optional research-only supplementary bird audit; excluded from commercial release"
     commercial_training_allowed: false
+    detector_training_allowed: false
   ucsc_field_dataset:
     local_dir: "data/field_holdout"
     purpose: "Independent UCSC campus test set with documented photographer permission"
     commercial_training_allowed: true
+    detector_training_allowed: true
 
 quantity_targets:
   smoke_test:
@@ -74,6 +108,16 @@ quantity_targets:
     min_obs_per_species: 30
     total_target: 600
 
+sampling_policy_v2:
+  max_obs_per_species: 800
+  min_obs_per_species_floor: 150
+  max_photos_per_obs_train: 3
+  max_photos_per_obs_eval: 1
+  max_single_observer_share: 0.05
+  min_short_side_px: 256
+  default_region: "US-CA"
+  widened_pacific_states: ["US-CA", "US-OR", "US-WA"]
+
 split_policy:
   train_ratio: 0.70
   validation_ratio: 0.15
@@ -81,3 +125,4 @@ split_policy:
   group_by: "observation_id"
   separate_observers_when_feasible: true
   max_phash_hamming_across_splits: 4
+  campus_place_split: "campus_test"

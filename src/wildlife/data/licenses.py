@@ -1,4 +1,4 @@
-"""License validation, attribution export, and commercial-release guardrails."""
+"""License validation, attribution export, and commercial-release guardrails (v1 + v2 Decision D1)."""
 
 from __future__ import annotations
 
@@ -9,6 +9,17 @@ from pathlib import Path
 from typing import Any, Dict, Iterable, List, Set, Tuple
 
 ALLOWED_PHOTO_LICENSES: Set[str] = {"cc0", "cc-by"}
+
+# Decision D1 (Resolved): CDLA-Permissive-1.0 is allowed ONLY for detector fine-tuning
+# and detector evaluation, NEVER in classifier training manifests.
+DETECTOR_ONLY_LICENSES: Set[str] = {"cdla-permissive-1.0", "cdla-permissive"}
+LILA_DETECTOR_SOURCES: Set[str] = {
+    "lila_cct",
+    "lila_cct_empty",
+    "lila_ena24",
+    "lila_channel_islands",
+    "lila_missouri",
+}
 
 NON_COMMERCIAL_OR_RESTRICTED: Set[str] = {
     "cc-by-nc",
@@ -40,17 +51,19 @@ def normalize_license_code(code: Any) -> str:
         "cc-by-4.0": "cc-by",
         "cc-by-3.0": "cc-by",
         "cc-by-2.0": "cc-by",
+        "cdla-permissive": "cdla-permissive-1.0",
     }
     return aliases.get(norm, norm)
 
 
 def validate_photo_license(
     license_code: Any,
-    source_dataset: str = "inaturalist_open_data",
+    source_dataset: str = "inat_open_data",
     allow_research_only: bool = False,
+    for_detector: bool = False,
     allowed_licenses: Set[str] = ALLOWED_PHOTO_LICENSES,
 ) -> str:
-    """Validate photo license and dataset source before ingestion."""
+    """Validate photo license and dataset source before ingestion (SPEC.md §2.3, v2 Decision D1)."""
     src_norm = (source_dataset or "").strip().lower()
     if src_norm in RESEARCH_ONLY_SOURCES and not allow_research_only:
         raise LicenseViolationError(
@@ -62,19 +75,29 @@ def validate_photo_license(
     if not norm:
         raise LicenseViolationError("Missing or empty photo_license is not permitted.")
 
-    if norm not in allowed_licenses:
-        if allow_research_only and norm in {"cc-by-nc", "cc-by-sa", "research-only"}:
-            return norm
-        raise LicenseViolationError(
-            f"Unapproved photo license '{license_code}' (normalized='{norm}'). "
-            f"Permitted licenses: {sorted(allowed_licenses)}"
-        )
-    return norm
+    if norm in allowed_licenses:
+        if src_norm in LILA_DETECTOR_SOURCES and not for_detector:
+            raise LicenseViolationError(
+                f"LILA dataset '{source_dataset}' is restricted to detector use only (Decision D1)."
+            )
+        return norm
+
+    if for_detector and norm in DETECTOR_ONLY_LICENSES and src_norm in LILA_DETECTOR_SOURCES:
+        return norm
+
+    if allow_research_only and norm in {"cc-by-nc", "cc-by-sa", "research-only"}:
+        return norm
+
+    raise LicenseViolationError(
+        f"Unapproved photo license '{license_code}' (normalized='{norm}', source='{source_dataset}', "
+        f"for_detector={for_detector}). Classifier allowed licenses: {sorted(allowed_licenses)}"
+    )
 
 
 def audit_manifest_licenses(
     rows: Iterable[Dict[str, Any]],
     allow_research_only: bool = False,
+    for_detector: bool = False,
 ) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
     approved: List[Dict[str, Any]] = []
     rejected: List[Dict[str, Any]] = []
@@ -84,9 +107,13 @@ def audit_manifest_licenses(
     for row in rows:
         lic = row.get("photo_license")
         src = str(row.get("source_dataset", "unknown"))
+        row_for_det = bool(for_detector or row.get("for_detector_only", False))
         try:
             norm_lic = validate_photo_license(
-                lic, source_dataset=src, allow_research_only=allow_research_only
+                lic,
+                source_dataset=src,
+                allow_research_only=allow_research_only,
+                for_detector=row_for_det,
             )
             clean_row = dict(row)
             clean_row["photo_license"] = norm_lic
@@ -106,8 +133,10 @@ def audit_manifest_licenses(
 
     summary = {
         "audit_timestamp": datetime.now(timezone.utc).isoformat(),
-        "allowed_licenses": sorted(ALLOWED_PHOTO_LICENSES),
+        "allowed_photo_licenses": sorted(ALLOWED_PHOTO_LICENSES),
+        "detector_only_licenses": sorted(DETECTOR_ONLY_LICENSES),
         "allow_research_only": allow_research_only,
+        "for_detector": for_detector,
         "approved_count": len(approved),
         "rejected_count": len(rejected),
         "counts_by_license": counts_by_license,

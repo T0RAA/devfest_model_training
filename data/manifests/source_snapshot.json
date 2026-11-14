@@ -1,0 +1,32 @@
+{
+  "snapshot_date": "2026-11-14T23:10:29Z",
+  "s3_bucket": "s3://inaturalist-open-data",
+  "s3_metadata_archive": "s3://inaturalist-open-data/metadata/inaturalist-open-data-latest.tar.gz",
+  "full_tarball_status": "NOT_RUN_LOCALLY (25+ GB tarball scan executes in Colab via notebooks/01_dataset_audit.ipynb and data/manifests/s3_open_data_query.sql)",
+  "live_inat_api_sample_pulled": true,
+  "california_cc0_ccby_available_observations": {
+    "M01": 6234,
+    "M02": 2930,
+    "M03": 897,
+    "M04": 572,
+    "M05": 1380,
+    "M06": 781,
+    "M07": 5824,
+    "M08": 1146,
+    "M09": 1656,
+    "M10": 1020,
+    "B01": 3608,
+    "B02": 3058,
+    "B03": 2608,
+    "B04": 6601,
+    "B05": 4793,
+    "B06": 4950,
+    "B07": 9035,
+    "B08": 3045,
+    "B09": 5509,
+    "B10": 2798
+  },
+  "species_widened_to_pacific_states": [],
+  "sample_images_downloaded_locally": 20,
+  "total_candidate_rows_pulled": 490
+}

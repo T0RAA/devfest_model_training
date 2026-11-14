@@ -1,0 +1,381 @@
+image_id,photo_id,observation_id,class_id,scientific_name,photo_license,photographer_credit,source_dataset,source_url
+inat_B01_762765200,762765200,414348129,B01,Meleagris gallopavo,cc0,Jacob Buchanan,inat_open_data,https://www.inaturalist.org/photos/762765200
+inat_B01_762906570,762906570,414418861,B01,Meleagris gallopavo,cc-by,Chris Stahl,inat_open_data,https://www.inaturalist.org/photos/762906570
+inat_B01_762906572,762906572,414418861,B01,Meleagris gallopavo,cc-by,Chris Stahl,inat_open_data,https://www.inaturalist.org/photos/762906572
+inat_B01_762906576,762906576,414418861,B01,Meleagris gallopavo,cc-by,Chris Stahl,inat_open_data,https://www.inaturalist.org/photos/762906576
+inat_B01_762953354,762953354,414441162,B01,Meleagris gallopavo,cc0,David H. Cox,inat_open_data,https://www.inaturalist.org/photos/762953354
+inat_B01_762977656,762977656,414452559,B01,Meleagris gallopavo,cc0,Dorothy Johnson,inat_open_data,https://www.inaturalist.org/photos/762977656
+inat_B01_762977840,762977840,414452559,B01,Meleagris gallopavo,cc0,Dorothy Johnson,inat_open_data,https://www.inaturalist.org/photos/762977840
+inat_B01_763019392,763019392,414473384,B01,Meleagris gallopavo,cc-by,Noah Lee,inat_open_data,https://www.inaturalist.org/photos/763019392
+inat_B01_763019482,763019482,414473384,B01,Meleagris gallopavo,cc-by,Noah Lee,inat_open_data,https://www.inaturalist.org/photos/763019482
+inat_B01_763112399,763112399,414520549,B01,Meleagris gallopavo,cc0,Jeff Davis,inat_open_data,https://www.inaturalist.org/photos/763112399
+inat_B01_763194076,763194076,414560835,B01,Meleagris gallopavo,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763194076
+inat_B01_763194105,763194105,414560835,B01,Meleagris gallopavo,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763194105
+inat_B01_763196246,763196246,414561938,B01,Meleagris gallopavo,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763196246
+inat_B01_763201582,763201582,414564588,B01,Meleagris gallopavo,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763201582
+inat_B01_763467642,763467642,414698063,B01,Meleagris gallopavo,cc0,Geoff Swaebe,inat_open_data,https://www.inaturalist.org/photos/763467642
+inat_B01_763501770,763501770,414714780,B01,Meleagris gallopavo,cc0,mularo1,inat_open_data,https://www.inaturalist.org/photos/763501770
+inat_B01_763595701,763595701,414760353,B01,Meleagris gallopavo,cc-by,Blake Ross,inat_open_data,https://www.inaturalist.org/photos/763595701
+inat_B02_761289963,761289963,413615625,B02,Callipepla californica,cc-by,Lisa Biasillo,inat_open_data,https://www.inaturalist.org/photos/761289963
+inat_B02_761290216,761290216,413615631,B02,Callipepla californica,cc-by,Lisa Biasillo,inat_open_data,https://www.inaturalist.org/photos/761290216
+inat_B02_761290253,761290253,413615639,B02,Callipepla californica,cc-by,Lisa Biasillo,inat_open_data,https://www.inaturalist.org/photos/761290253
+inat_B02_761290254,761290254,413615640,B02,Callipepla californica,cc-by,Lisa Biasillo,inat_open_data,https://www.inaturalist.org/photos/761290254
+inat_B02_761290385,761290385,413615666,B02,Callipepla californica,cc-by,Lisa Biasillo,inat_open_data,https://www.inaturalist.org/photos/761290385
+inat_B02_761354936,761354936,413650488,B02,Callipepla californica,cc-by,Liam Steele,inat_open_data,https://www.inaturalist.org/photos/761354936
+inat_B02_761426892,761426892,413683168,B02,Callipepla californica,cc0,dougbrown,inat_open_data,https://www.inaturalist.org/photos/761426892
+inat_B02_761434509,761434509,413687362,B02,Callipepla californica,cc-by,William Harland,inat_open_data,https://www.inaturalist.org/photos/761434509
+inat_B02_761741844,761741844,413845742,B02,Callipepla californica,cc-by,eklemp,inat_open_data,https://www.inaturalist.org/photos/761741844
+inat_B02_761741850,761741850,413845742,B02,Callipepla californica,cc-by,eklemp,inat_open_data,https://www.inaturalist.org/photos/761741850
+inat_B02_762204462,762204462,414073259,B02,Callipepla californica,cc0,dougbrown,inat_open_data,https://www.inaturalist.org/photos/762204462
+inat_B02_762841543,762841543,414386409,B02,Callipepla californica,cc-by,Joaquín Krasuk,inat_open_data,https://www.inaturalist.org/photos/762841543
+inat_B02_763024293,763024293,414476164,B02,Callipepla californica,cc0,Jaco Grundling,inat_open_data,https://www.inaturalist.org/photos/763024293
+inat_B03_762570932,762570932,414252892,B03,Cyanocitta stelleri,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762570932
+inat_B03_762570963,762570963,414252892,B03,Cyanocitta stelleri,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762570963
+inat_B03_762570993,762570993,414252892,B03,Cyanocitta stelleri,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762570993
+inat_B03_762610188,762610188,414271668,B03,Cyanocitta stelleri,cc0,dougbrown,inat_open_data,https://www.inaturalist.org/photos/762610188
+inat_B03_762822193,762822193,414376876,B03,Cyanocitta stelleri,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762822193
+inat_B03_762832027,762832027,414381652,B03,Cyanocitta stelleri,cc-by,Galen Seilis,inat_open_data,https://www.inaturalist.org/photos/762832027
+inat_B03_762832066,762832066,414381672,B03,Cyanocitta stelleri,cc-by,Galen Seilis,inat_open_data,https://www.inaturalist.org/photos/762832066
+inat_B03_762848074,762848074,414390099,B03,Cyanocitta stelleri,cc-by,Bob Miller,inat_open_data,https://www.inaturalist.org/photos/762848074
+inat_B03_762850162,762850162,414391158,B03,Cyanocitta stelleri,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762850162
+inat_B03_762850188,762850188,414391158,B03,Cyanocitta stelleri,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762850188
+inat_B03_762850212,762850212,414391158,B03,Cyanocitta stelleri,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762850212
+inat_B03_762861976,762861976,414396092,B03,Cyanocitta stelleri,cc-by,Bob Miller,inat_open_data,https://www.inaturalist.org/photos/762861976
+inat_B03_762861992,762861992,414396092,B03,Cyanocitta stelleri,cc-by,Bob Miller,inat_open_data,https://www.inaturalist.org/photos/762861992
+inat_B03_762875751,762875751,414402543,B03,Cyanocitta stelleri,cc0,dougbrown,inat_open_data,https://www.inaturalist.org/photos/762875751
+inat_B03_763201330,763201330,414564433,B03,Cyanocitta stelleri,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763201330
+inat_B03_763201359,763201359,414564433,B03,Cyanocitta stelleri,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763201359
+inat_B03_763202823,763202823,414565308,B03,Cyanocitta stelleri,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763202823
+inat_B03_763624921,763624921,414774640,B03,Cyanocitta stelleri,cc-by,longwang,inat_open_data,https://www.inaturalist.org/photos/763624921
+inat_B03_763624944,763624944,414774640,B03,Cyanocitta stelleri,cc-by,longwang,inat_open_data,https://www.inaturalist.org/photos/763624944
+inat_B04_762638846,762638846,414285888,B04,Aphelocoma californica,cc-by,Cricket Raspet,inat_open_data,https://www.inaturalist.org/photos/762638846
+inat_B04_762639044,762639044,414285891,B04,Aphelocoma californica,cc-by,Cricket Raspet,inat_open_data,https://www.inaturalist.org/photos/762639044
+inat_B04_762646533,762646533,414289025,B04,Aphelocoma californica,cc0,Ben,inat_open_data,https://www.inaturalist.org/photos/762646533
+inat_B04_762812776,762812776,414372492,B04,Aphelocoma californica,cc-by,birdd0g,inat_open_data,https://www.inaturalist.org/photos/762812776
+inat_B04_762812777,762812777,414372492,B04,Aphelocoma californica,cc-by,birdd0g,inat_open_data,https://www.inaturalist.org/photos/762812777
+inat_B04_762812779,762812779,414372492,B04,Aphelocoma californica,cc-by,birdd0g,inat_open_data,https://www.inaturalist.org/photos/762812779
+inat_B04_762842759,762842759,414386978,B04,Aphelocoma californica,cc0,Ben,inat_open_data,https://www.inaturalist.org/photos/762842759
+inat_B04_762849223,762849223,414390714,B04,Aphelocoma californica,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762849223
+inat_B04_762849251,762849251,414390714,B04,Aphelocoma californica,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762849251
+inat_B04_762849874,762849874,414390714,B04,Aphelocoma californica,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762849874
+inat_B04_762850249,762850249,414391224,B04,Aphelocoma californica,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762850249
+inat_B04_762850271,762850271,414391224,B04,Aphelocoma californica,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762850271
+inat_B04_762850293,762850293,414391224,B04,Aphelocoma californica,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762850293
+inat_B04_762861563,762861563,414396195,B04,Aphelocoma californica,cc0,Adam Jackson,inat_open_data,https://www.inaturalist.org/photos/762861563
+inat_B04_762970036,762970036,414451865,B04,Aphelocoma californica,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762970036
+inat_B04_763025425,763025425,414476728,B04,Aphelocoma californica,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763025425
+inat_B04_763330363,763330363,414629270,B04,Aphelocoma californica,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763330363
+inat_B04_763330379,763330379,414629270,B04,Aphelocoma californica,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763330379
+inat_B04_763330385,763330385,414629270,B04,Aphelocoma californica,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763330385
+inat_B04_763529653,763529653,414728734,B04,Aphelocoma californica,cc-by,💯🔥🙏PIGEON APPRECIATOR 💯🔥🙏,inat_open_data,https://www.inaturalist.org/photos/763529653
+inat_B05_763148234,763148234,414556337,B05,Corvus corax,cc-by,Andrejus Gaidamavičius,inat_open_data,https://www.inaturalist.org/photos/763148234
+inat_B05_763196565,763196565,414562067,B05,Corvus corax,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763196565
+inat_B05_763196582,763196582,414562067,B05,Corvus corax,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763196582
+inat_B05_763196602,763196602,414562067,B05,Corvus corax,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763196602
+inat_B05_763230125,763230125,414578910,B05,Corvus corax,cc-by,Roberto Daniel Avila,inat_open_data,https://www.inaturalist.org/photos/763230125
+inat_B05_763282160,763282160,414605123,B05,Corvus corax,cc0,Ben,inat_open_data,https://www.inaturalist.org/photos/763282160
+inat_B05_763358494,763358494,414643372,B05,Corvus corax,cc-by,Cricket Raspet,inat_open_data,https://www.inaturalist.org/photos/763358494
+inat_B05_763358565,763358565,414643373,B05,Corvus corax,cc-by,Cricket Raspet,inat_open_data,https://www.inaturalist.org/photos/763358565
+inat_B05_763456737,763456737,414693658,B05,Corvus corax,cc-by,k,inat_open_data,https://www.inaturalist.org/photos/763456737
+inat_B05_763456750,763456750,414693658,B05,Corvus corax,cc-by,k,inat_open_data,https://www.inaturalist.org/photos/763456750
+inat_B05_763456754,763456754,414693658,B05,Corvus corax,cc-by,k,inat_open_data,https://www.inaturalist.org/photos/763456754
+inat_B05_763486141,763486141,414707632,B05,Corvus corax,cc-by,nerpanura,inat_open_data,https://www.inaturalist.org/photos/763486141
+inat_B05_763488134,763488134,414708456,B05,Corvus corax,cc-by,Kevin Judge,inat_open_data,https://www.inaturalist.org/photos/763488134
+inat_B05_763488151,763488151,414708456,B05,Corvus corax,cc-by,Kevin Judge,inat_open_data,https://www.inaturalist.org/photos/763488151
+inat_B05_763579213,763579213,414752201,B05,Corvus corax,cc0,Don Wellmann,inat_open_data,https://www.inaturalist.org/photos/763579213
+inat_B05_763582328,763582328,414754135,B05,Corvus corax,cc-by,Pam Hardy,inat_open_data,https://www.inaturalist.org/photos/763582328
+inat_B05_763592051,763592051,414738989,B05,Corvus corax,cc-by,bluefeathers,inat_open_data,https://www.inaturalist.org/photos/763592051
+inat_B05_763592303,763592303,414738989,B05,Corvus corax,cc-by,bluefeathers,inat_open_data,https://www.inaturalist.org/photos/763592303
+inat_B06_761836997,761836997,413889981,B06,Melanerpes formicivorus,cc-by,CK2AZ,inat_open_data,https://www.inaturalist.org/photos/761836997
+inat_B06_761836998,761836998,413889981,B06,Melanerpes formicivorus,cc-by,CK2AZ,inat_open_data,https://www.inaturalist.org/photos/761836998
+inat_B06_762264040,762264040,414126509,B06,Melanerpes formicivorus,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762264040
+inat_B06_762264237,762264237,414126537,B06,Melanerpes formicivorus,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762264237
+inat_B06_762605184,762605184,414269311,B06,Melanerpes formicivorus,cc-by,coniferfan07,inat_open_data,https://www.inaturalist.org/photos/762605184
+inat_B06_762616043,762616043,414275015,B06,Melanerpes formicivorus,cc-by,Barbara Banfield,inat_open_data,https://www.inaturalist.org/photos/762616043
+inat_B06_762897409,762897409,414414089,B06,Melanerpes formicivorus,cc-by,Skyler K,inat_open_data,https://www.inaturalist.org/photos/762897409
+inat_B06_762913723,762913723,414424183,B06,Melanerpes formicivorus,cc-by,Gavin Skeen,inat_open_data,https://www.inaturalist.org/photos/762913723
+inat_B06_762952850,762952850,414443829,B06,Melanerpes formicivorus,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762952850
+inat_B06_762983923,762983923,414455835,B06,Melanerpes formicivorus,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/762983923
+inat_B06_763025353,763025353,414476685,B06,Melanerpes formicivorus,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763025353
+inat_B06_763025367,763025367,414476685,B06,Melanerpes formicivorus,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763025367
+inat_B06_763203849,763203849,414565803,B06,Melanerpes formicivorus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763203849
+inat_B06_763203867,763203867,414565803,B06,Melanerpes formicivorus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763203867
+inat_B06_763203889,763203889,414565803,B06,Melanerpes formicivorus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763203889
+inat_B06_763209419,763209419,414568646,B06,Melanerpes formicivorus,cc-by,JCorven,inat_open_data,https://www.inaturalist.org/photos/763209419
+inat_B07_762526566,762526566,414230781,B07,Calypte anna,cc-by,William Rogers,inat_open_data,https://www.inaturalist.org/photos/762526566
+inat_B07_762526821,762526821,414230931,B07,Calypte anna,cc-by,William Rogers,inat_open_data,https://www.inaturalist.org/photos/762526821
+inat_B07_762577267,762577267,414256116,B07,Calypte anna,cc0,agoldber,inat_open_data,https://www.inaturalist.org/photos/762577267
+inat_B07_762577367,762577367,414256116,B07,Calypte anna,cc0,agoldber,inat_open_data,https://www.inaturalist.org/photos/762577367
+inat_B07_762577422,762577422,414256116,B07,Calypte anna,cc0,agoldber,inat_open_data,https://www.inaturalist.org/photos/762577422
+inat_B07_762636210,762636210,414284657,B07,Calypte anna,cc0,Ben,inat_open_data,https://www.inaturalist.org/photos/762636210
+inat_B07_762822288,762822288,414376919,B07,Calypte anna,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762822288
+inat_B07_762952398,762952398,414443788,B07,Calypte anna,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762952398
+inat_B07_762952404,762952404,414443788,B07,Calypte anna,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762952404
+inat_B07_762952510,762952510,414443798,B07,Calypte anna,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762952510
+inat_B07_763171731,763171731,414550810,B07,Calypte anna,cc0,Anne Parsons,inat_open_data,https://www.inaturalist.org/photos/763171731
+inat_B07_763171744,763171744,414550810,B07,Calypte anna,cc0,Anne Parsons,inat_open_data,https://www.inaturalist.org/photos/763171744
+inat_B07_763171827,763171827,414550810,B07,Calypte anna,cc0,Anne Parsons,inat_open_data,https://www.inaturalist.org/photos/763171827
+inat_B07_763198719,763198719,414564794,B07,Calypte anna,cc-by,znot,inat_open_data,https://www.inaturalist.org/photos/763198719
+inat_B07_763201389,763201389,414564454,B07,Calypte anna,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763201389
+inat_B07_763201412,763201412,414564454,B07,Calypte anna,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763201412
+inat_B07_763201433,763201433,414564454,B07,Calypte anna,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763201433
+inat_B07_763214637,763214637,414571406,B07,Calypte anna,cc0,saintaardvark,inat_open_data,https://www.inaturalist.org/photos/763214637
+inat_B07_763214638,763214638,414571406,B07,Calypte anna,cc0,saintaardvark,inat_open_data,https://www.inaturalist.org/photos/763214638
+inat_B07_763343774,763343774,414640170,B07,Calypte anna,cc-by,Gavin Skeen,inat_open_data,https://www.inaturalist.org/photos/763343774
+inat_B08_763227183,763227183,414667103,B08,Turdus migratorius,cc-by,scaup,inat_open_data,https://www.inaturalist.org/photos/763227183
+inat_B08_763295221,763295221,414611977,B08,Turdus migratorius,cc0,Damien Wallace,inat_open_data,https://www.inaturalist.org/photos/763295221
+inat_B08_763295440,763295440,414612178,B08,Turdus migratorius,cc0,Damien Wallace,inat_open_data,https://www.inaturalist.org/photos/763295440
+inat_B08_763348638,763348638,414638121,B08,Turdus migratorius,cc-by,Jared Lincenberg,inat_open_data,https://www.inaturalist.org/photos/763348638
+inat_B08_763348639,763348639,414638121,B08,Turdus migratorius,cc-by,Jared Lincenberg,inat_open_data,https://www.inaturalist.org/photos/763348639
+inat_B08_763474934,763474934,414701773,B08,Turdus migratorius,cc-by,Nick Kleinschmidt,inat_open_data,https://www.inaturalist.org/photos/763474934
+inat_B08_763476183,763476183,414702431,B08,Turdus migratorius,cc0,Calinsdad,inat_open_data,https://www.inaturalist.org/photos/763476183
+inat_B08_763481044,763481044,414704993,B08,Turdus migratorius,cc-by,remlaps,inat_open_data,https://www.inaturalist.org/photos/763481044
+inat_B08_763486134,763486134,414707631,B08,Turdus migratorius,cc-by,nerpanura,inat_open_data,https://www.inaturalist.org/photos/763486134
+inat_B08_763554991,763554991,414741353,B08,Turdus migratorius,cc-by,Sam Kieschnick,inat_open_data,https://www.inaturalist.org/photos/763554991
+inat_B08_763570100,763570100,414748434,B08,Turdus migratorius,cc-by,Dmitry Mozzherin,inat_open_data,https://www.inaturalist.org/photos/763570100
+inat_B08_763595575,763595575,414760290,B08,Turdus migratorius,cc-by,Blake Ross,inat_open_data,https://www.inaturalist.org/photos/763595575
+inat_B08_763599449,763599449,414762237,B08,Turdus migratorius,cc-by,LM Cunningham,inat_open_data,https://www.inaturalist.org/photos/763599449
+inat_B09_763243483,763243483,414587439,B09,Junco hyemalis,cc-by,John Thomlinson,inat_open_data,https://www.inaturalist.org/photos/763243483
+inat_B09_763333914,763333914,414631204,B09,Junco hyemalis,cc0,Jodhan Fine,inat_open_data,https://www.inaturalist.org/photos/763333914
+inat_B09_763343325,763343325,414640063,B09,Junco hyemalis,cc-by,Gavin Skeen,inat_open_data,https://www.inaturalist.org/photos/763343325
+inat_B09_763343330,763343330,414640063,B09,Junco hyemalis,cc-by,Gavin Skeen,inat_open_data,https://www.inaturalist.org/photos/763343330
+inat_B09_763343342,763343342,414640063,B09,Junco hyemalis,cc-by,Gavin Skeen,inat_open_data,https://www.inaturalist.org/photos/763343342
+inat_B09_763481203,763481203,414705075,B09,Junco hyemalis,cc0,Jeff Davis,inat_open_data,https://www.inaturalist.org/photos/763481203
+inat_B09_763494288,763494288,414711192,B09,Junco hyemalis,cc-by,willingarden,inat_open_data,https://www.inaturalist.org/photos/763494288
+inat_B09_763494333,763494333,414711241,B09,Junco hyemalis,cc0,robinlanark,inat_open_data,https://www.inaturalist.org/photos/763494333
+inat_B09_763494359,763494359,414711241,B09,Junco hyemalis,cc0,robinlanark,inat_open_data,https://www.inaturalist.org/photos/763494359
+inat_B09_763519832,763519832,414723832,B09,Junco hyemalis,cc-by,Elliot Greiner,inat_open_data,https://www.inaturalist.org/photos/763519832
+inat_B09_763549749,763549749,414738051,B09,Junco hyemalis,cc0,joy4birds,inat_open_data,https://www.inaturalist.org/photos/763549749
+inat_B09_763552870,763552870,414739608,B09,Junco hyemalis,cc-by,hr_dragonfly,inat_open_data,https://www.inaturalist.org/photos/763552870
+inat_B09_763559269,763559269,414743110,B09,Junco hyemalis,cc0,Don Wellmann,inat_open_data,https://www.inaturalist.org/photos/763559269
+inat_B09_763604633,763604633,414764846,B09,Junco hyemalis,cc-by,Derek Spencer,inat_open_data,https://www.inaturalist.org/photos/763604633
+inat_B09_763620984,763620984,414772707,B09,Junco hyemalis,cc0,Calinsdad,inat_open_data,https://www.inaturalist.org/photos/763620984
+inat_B10_762264371,762264371,414126546,B10,Pipilo maculatus,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762264371
+inat_B10_762315685,762315685,414130660,B10,Pipilo maculatus,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762315685
+inat_B10_762315689,762315689,414130660,B10,Pipilo maculatus,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762315689
+inat_B10_762315692,762315692,414130660,B10,Pipilo maculatus,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762315692
+inat_B10_762569566,762569566,414252193,B10,Pipilo maculatus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762569566
+inat_B10_762569595,762569595,414252193,B10,Pipilo maculatus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762569595
+inat_B10_762570782,762570782,414252821,B10,Pipilo maculatus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762570782
+inat_B10_762846838,762846838,414389529,B10,Pipilo maculatus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762846838
+inat_B10_762846872,762846872,414389529,B10,Pipilo maculatus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762846872
+inat_B10_762846907,762846907,414389529,B10,Pipilo maculatus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762846907
+inat_B10_762849958,762849958,414391047,B10,Pipilo maculatus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762849958
+inat_B10_762969668,762969668,414451853,B10,Pipilo maculatus,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762969668
+inat_B10_762969683,762969683,414451853,B10,Pipilo maculatus,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762969683
+inat_B10_762969689,762969689,414451853,B10,Pipilo maculatus,cc0,Sofia Whatsername,inat_open_data,https://www.inaturalist.org/photos/762969689
+inat_B10_763198880,763198880,414564809,B10,Pipilo maculatus,cc-by,znot,inat_open_data,https://www.inaturalist.org/photos/763198880
+inat_B10_763203934,763203934,414565837,B10,Pipilo maculatus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/763203934
+inat_B10_763368718,763368718,414648531,B10,Pipilo maculatus,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763368718
+inat_B10_763368735,763368735,414648531,B10,Pipilo maculatus,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763368735
+inat_B10_763486129,763486129,414707623,B10,Pipilo maculatus,cc-by,nerpanura,inat_open_data,https://www.inaturalist.org/photos/763486129
+inat_B10_763571923,763571923,414748851,B10,Pipilo maculatus,cc0,squalicorax,inat_open_data,https://www.inaturalist.org/photos/763571923
+inat_M01_762752460,762752460,414341840,M01,Odocoileus hemionus,cc-by,Eric Lamb,inat_open_data,https://www.inaturalist.org/photos/762752460
+inat_M01_762752464,762752464,414341840,M01,Odocoileus hemionus,cc-by,Eric Lamb,inat_open_data,https://www.inaturalist.org/photos/762752464
+inat_M01_762752465,762752465,414341840,M01,Odocoileus hemionus,cc-by,Eric Lamb,inat_open_data,https://www.inaturalist.org/photos/762752465
+inat_M01_762766522,762766522,414348554,M01,Odocoileus hemionus,cc0,Joshua Zupan,inat_open_data,https://www.inaturalist.org/photos/762766522
+inat_M01_763025222,763025222,414476638,M01,Odocoileus hemionus,cc0,Emily Langdon-Lassagne,inat_open_data,https://www.inaturalist.org/photos/763025222
+inat_M01_763025223,763025223,414476638,M01,Odocoileus hemionus,cc0,Emily Langdon-Lassagne,inat_open_data,https://www.inaturalist.org/photos/763025223
+inat_M01_763025230,763025230,414476638,M01,Odocoileus hemionus,cc0,Emily Langdon-Lassagne,inat_open_data,https://www.inaturalist.org/photos/763025230
+inat_M01_763326494,763326494,414627035,M01,Odocoileus hemionus,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763326494
+inat_M01_763326511,763326511,414627035,M01,Odocoileus hemionus,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763326511
+inat_M01_763326536,763326536,414627035,M01,Odocoileus hemionus,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763326536
+inat_M01_763355084,763355084,414641486,M01,Odocoileus hemionus,cc0,Drew Meyer,inat_open_data,https://www.inaturalist.org/photos/763355084
+inat_M01_763374548,763374548,414717641,M01,Odocoileus hemionus,cc-by,Daughter Dad,inat_open_data,https://www.inaturalist.org/photos/763374548
+inat_M01_763374551,763374551,414717642,M01,Odocoileus hemionus,cc-by,Daughter Dad,inat_open_data,https://www.inaturalist.org/photos/763374551
+inat_M01_763374555,763374555,414717647,M01,Odocoileus hemionus,cc-by,Daughter Dad,inat_open_data,https://www.inaturalist.org/photos/763374555
+inat_M01_763374558,763374558,414717648,M01,Odocoileus hemionus,cc-by,Daughter Dad,inat_open_data,https://www.inaturalist.org/photos/763374558
+inat_M01_763577970,763577970,414751993,M01,Odocoileus hemionus,cc-by,Pam Hardy,inat_open_data,https://www.inaturalist.org/photos/763577970
+inat_M01_763577989,763577989,414751993,M01,Odocoileus hemionus,cc-by,Pam Hardy,inat_open_data,https://www.inaturalist.org/photos/763577989
+inat_M01_763577995,763577995,414751993,M01,Odocoileus hemionus,cc-by,Pam Hardy,inat_open_data,https://www.inaturalist.org/photos/763577995
+inat_M01_763578058,763578058,414751999,M01,Odocoileus hemionus,cc-by,Pam Hardy,inat_open_data,https://www.inaturalist.org/photos/763578058
+inat_M01_763589161,763589161,414757936,M01,Odocoileus hemionus,cc0,Andrew Jensen,inat_open_data,https://www.inaturalist.org/photos/763589161
+inat_M02_763099325,763099325,414513539,M02,Canis latrans,cc0,Milwaukee County Parks - Natural Areas Program,inat_open_data,https://www.inaturalist.org/photos/763099325
+inat_M02_763101718,763101718,414514879,M02,Canis latrans,cc0,Milwaukee County Parks - Natural Areas Program,inat_open_data,https://www.inaturalist.org/photos/763101718
+inat_M02_763104017,763104017,414515916,M02,Canis latrans,cc0,Milwaukee County Parks - Natural Areas Program,inat_open_data,https://www.inaturalist.org/photos/763104017
+inat_M02_763105246,763105246,414516704,M02,Canis latrans,cc0,Milwaukee County Parks - Natural Areas Program,inat_open_data,https://www.inaturalist.org/photos/763105246
+inat_M02_763133937,763133937,414531492,M02,Canis latrans,cc-by,cesar stastny,inat_open_data,https://www.inaturalist.org/photos/763133937
+inat_M02_763167997,763167997,414548338,M02,Canis latrans,cc-by,Lauren,inat_open_data,https://www.inaturalist.org/photos/763167997
+inat_M02_763169701,763169701,414549149,M02,Canis latrans,cc-by,Matt Felperin,inat_open_data,https://www.inaturalist.org/photos/763169701
+inat_M02_763169710,763169710,414549149,M02,Canis latrans,cc-by,Matt Felperin,inat_open_data,https://www.inaturalist.org/photos/763169710
+inat_M02_763169725,763169725,414549149,M02,Canis latrans,cc-by,Matt Felperin,inat_open_data,https://www.inaturalist.org/photos/763169725
+inat_M02_763263805,763263805,414596865,M02,Canis latrans,cc-by,Zac Peterson,inat_open_data,https://www.inaturalist.org/photos/763263805
+inat_M02_763369250,763369250,414648756,M02,Canis latrans,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763369250
+inat_M02_763451599,763451599,414689775,M02,Canis latrans,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763451599
+inat_M02_763451618,763451618,414689624,M02,Canis latrans,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763451618
+inat_M02_763451620,763451620,414689624,M02,Canis latrans,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763451620
+inat_M02_763451625,763451625,414689624,M02,Canis latrans,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763451625
+inat_M02_763552674,763552674,414741276,M02,Canis latrans,cc0,Andrew Jensen,inat_open_data,https://www.inaturalist.org/photos/763552674
+inat_M03_761843997,761843997,413894029,M03,Lynx rufus,cc-by,Colin Croft,inat_open_data,https://www.inaturalist.org/photos/761843997
+inat_M03_761844011,761844011,413894029,M03,Lynx rufus,cc-by,Colin Croft,inat_open_data,https://www.inaturalist.org/photos/761844011
+inat_M03_761844018,761844018,413894029,M03,Lynx rufus,cc-by,Colin Croft,inat_open_data,https://www.inaturalist.org/photos/761844018
+inat_M03_761912628,761912628,413928160,M03,Lynx rufus,cc-by,Colin Croft,inat_open_data,https://www.inaturalist.org/photos/761912628
+inat_M03_761912633,761912633,413928160,M03,Lynx rufus,cc-by,Colin Croft,inat_open_data,https://www.inaturalist.org/photos/761912633
+inat_M03_761912642,761912642,413928160,M03,Lynx rufus,cc-by,Colin Croft,inat_open_data,https://www.inaturalist.org/photos/761912642
+inat_M03_761919259,761919259,413931455,M03,Lynx rufus,cc-by,Colin Croft,inat_open_data,https://www.inaturalist.org/photos/761919259
+inat_M03_761919266,761919266,413931455,M03,Lynx rufus,cc-by,Colin Croft,inat_open_data,https://www.inaturalist.org/photos/761919266
+inat_M03_761921018,761921018,413931935,M03,Lynx rufus,cc-by,Colin Croft,inat_open_data,https://www.inaturalist.org/photos/761921018
+inat_M03_761921027,761921027,413931935,M03,Lynx rufus,cc-by,Colin Croft,inat_open_data,https://www.inaturalist.org/photos/761921027
+inat_M03_762252828,762252828,414096547,M03,Lynx rufus,cc-by,Cricket Raspet,inat_open_data,https://www.inaturalist.org/photos/762252828
+inat_M03_762799146,762799146,414365786,M03,Lynx rufus,cc0,Christopher Foott,inat_open_data,https://www.inaturalist.org/photos/762799146
+inat_M03_763094528,763094528,414022085,M03,Lynx rufus,cc-by,Goosehunter75,inat_open_data,https://www.inaturalist.org/photos/763094528
+inat_M03_763171503,763171503,414550193,M03,Lynx rufus,cc-by,Bruce Slater,inat_open_data,https://www.inaturalist.org/photos/763171503
+inat_M03_763415644,763415644,414671297,M03,Lynx rufus,cc0,Jeff Davis,inat_open_data,https://www.inaturalist.org/photos/763415644
+inat_M03_763451242,763451242,414689578,M03,Lynx rufus,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763451242
+inat_M03_763554269,763554269,414740247,M03,Lynx rufus,cc-by,kdcs,inat_open_data,https://www.inaturalist.org/photos/763554269
+inat_M03_763597342,763597342,414761216,M03,Lynx rufus,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763597342
+inat_M04_756871696,756871696,411427269,M04,Urocyon cinereoargenteus,cc0,GinaGPark,inat_open_data,https://www.inaturalist.org/photos/756871696
+inat_M04_756879259,756879259,411430984,M04,Urocyon cinereoargenteus,cc-by,Cody Stricker,inat_open_data,https://www.inaturalist.org/photos/756879259
+inat_M04_758571919,758571919,412277776,M04,Urocyon cinereoargenteus,cc-by,Natasha Haggard,inat_open_data,https://www.inaturalist.org/photos/758571919
+inat_M04_758574355,758574355,412277776,M04,Urocyon cinereoargenteus,cc-by,Natasha Haggard,inat_open_data,https://www.inaturalist.org/photos/758574355
+inat_M04_758574356,758574356,412277776,M04,Urocyon cinereoargenteus,cc-by,Natasha Haggard,inat_open_data,https://www.inaturalist.org/photos/758574356
+inat_M04_758606976,758606976,412291172,M04,Urocyon cinereoargenteus,cc-by,Natasha Haggard,inat_open_data,https://www.inaturalist.org/photos/758606976
+inat_M04_758607977,758607977,412291174,M04,Urocyon cinereoargenteus,cc-by,Natasha Haggard,inat_open_data,https://www.inaturalist.org/photos/758607977
+inat_M04_758607995,758607995,412291174,M04,Urocyon cinereoargenteus,cc-by,Natasha Haggard,inat_open_data,https://www.inaturalist.org/photos/758607995
+inat_M04_759789099,759789099,412875041,M04,Urocyon cinereoargenteus,cc0,mike_cove,inat_open_data,https://www.inaturalist.org/photos/759789099
+inat_M04_759789434,759789434,412875041,M04,Urocyon cinereoargenteus,cc0,mike_cove,inat_open_data,https://www.inaturalist.org/photos/759789434
+inat_M04_759789502,759789502,412875041,M04,Urocyon cinereoargenteus,cc0,mike_cove,inat_open_data,https://www.inaturalist.org/photos/759789502
+inat_M04_760291043,760291043,413121252,M04,Urocyon cinereoargenteus,cc-by,samdmxx,inat_open_data,https://www.inaturalist.org/photos/760291043
+inat_M04_760823841,760823841,413388663,M04,Urocyon cinereoargenteus,cc0,Bonnie Isaac,inat_open_data,https://www.inaturalist.org/photos/760823841
+inat_M04_760978592,760978592,413464095,M04,Urocyon cinereoargenteus,cc-by,Javier Hernandez,inat_open_data,https://www.inaturalist.org/photos/760978592
+inat_M04_761498964,761498964,413717273,M04,Urocyon cinereoargenteus,cc-by,Andrés Mora Fallas,inat_open_data,https://www.inaturalist.org/photos/761498964
+inat_M04_761498995,761498995,413717273,M04,Urocyon cinereoargenteus,cc-by,Andrés Mora Fallas,inat_open_data,https://www.inaturalist.org/photos/761498995
+inat_M04_761499011,761499011,413717273,M04,Urocyon cinereoargenteus,cc-by,Andrés Mora Fallas,inat_open_data,https://www.inaturalist.org/photos/761499011
+inat_M04_762558252,762558252,414246374,M04,Urocyon cinereoargenteus,cc-by,Emily,inat_open_data,https://www.inaturalist.org/photos/762558252
+inat_M04_762895216,762895216,414412902,M04,Urocyon cinereoargenteus,cc-by,Norma Malinowski,inat_open_data,https://www.inaturalist.org/photos/762895216
+inat_M05_763133911,763133911,414531484,M05,Procyon lotor,cc-by,cesar stastny,inat_open_data,https://www.inaturalist.org/photos/763133911
+inat_M05_763133950,763133950,414531501,M05,Procyon lotor,cc-by,cesar stastny,inat_open_data,https://www.inaturalist.org/photos/763133950
+inat_M05_763133998,763133998,414531531,M05,Procyon lotor,cc-by,cesar stastny,inat_open_data,https://www.inaturalist.org/photos/763133998
+inat_M05_763202033,763202033,414564779,M05,Procyon lotor,cc0,mike_cove,inat_open_data,https://www.inaturalist.org/photos/763202033
+inat_M05_763202076,763202076,414564779,M05,Procyon lotor,cc0,mike_cove,inat_open_data,https://www.inaturalist.org/photos/763202076
+inat_M05_763202904,763202904,414564779,M05,Procyon lotor,cc0,mike_cove,inat_open_data,https://www.inaturalist.org/photos/763202904
+inat_M05_763340991,763340991,414634544,M05,Procyon lotor,cc-by,Zac Peterson,inat_open_data,https://www.inaturalist.org/photos/763340991
+inat_M05_763472356,763472356,414700441,M05,Procyon lotor,cc-by,cesar stastny,inat_open_data,https://www.inaturalist.org/photos/763472356
+inat_M05_763472395,763472395,414700454,M05,Procyon lotor,cc-by,cesar stastny,inat_open_data,https://www.inaturalist.org/photos/763472395
+inat_M05_763472426,763472426,414700469,M05,Procyon lotor,cc-by,cesar stastny,inat_open_data,https://www.inaturalist.org/photos/763472426
+inat_M05_763472457,763472457,414700482,M05,Procyon lotor,cc-by,cesar stastny,inat_open_data,https://www.inaturalist.org/photos/763472457
+inat_M05_763472503,763472503,414700499,M05,Procyon lotor,cc-by,cesar stastny,inat_open_data,https://www.inaturalist.org/photos/763472503
+inat_M05_763472562,763472562,414700513,M05,Procyon lotor,cc-by,cesar stastny,inat_open_data,https://www.inaturalist.org/photos/763472562
+inat_M05_763618549,763618549,414771627,M05,Procyon lotor,cc-by,Brandon McCracken,inat_open_data,https://www.inaturalist.org/photos/763618549
+inat_M06_759770065,759770065,412865641,M06,Mephitis mephitis,cc-by,Leonardus Bakker,inat_open_data,https://www.inaturalist.org/photos/759770065
+inat_M06_759770069,759770069,412865641,M06,Mephitis mephitis,cc-by,Leonardus Bakker,inat_open_data,https://www.inaturalist.org/photos/759770069
+inat_M06_759770070,759770070,412865641,M06,Mephitis mephitis,cc-by,Leonardus Bakker,inat_open_data,https://www.inaturalist.org/photos/759770070
+inat_M06_760535335,760535335,413242525,M06,Mephitis mephitis,cc-by,Jessica Utrup,inat_open_data,https://www.inaturalist.org/photos/760535335
+inat_M06_760535366,760535366,413242525,M06,Mephitis mephitis,cc-by,Jessica Utrup,inat_open_data,https://www.inaturalist.org/photos/760535366
+inat_M06_760724871,760724871,413337610,M06,Mephitis mephitis,cc-by,Jackie T,inat_open_data,https://www.inaturalist.org/photos/760724871
+inat_M06_760996517,760996517,413472394,M06,Mephitis mephitis,cc0,Angelique Todd,inat_open_data,https://www.inaturalist.org/photos/760996517
+inat_M06_761087384,761087384,413513624,M06,Mephitis mephitis,cc-by,Tser,inat_open_data,https://www.inaturalist.org/photos/761087384
+inat_M06_761396332,761396332,413668597,M06,Mephitis mephitis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/761396332
+inat_M06_761396334,761396334,413668597,M06,Mephitis mephitis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/761396334
+inat_M06_761688457,761688457,413819023,M06,Mephitis mephitis,cc-by,eml23,inat_open_data,https://www.inaturalist.org/photos/761688457
+inat_M06_761906056,761906056,413924412,M06,Mephitis mephitis,cc0,Guerric Haché,inat_open_data,https://www.inaturalist.org/photos/761906056
+inat_M06_762032543,762032543,413986578,M06,Mephitis mephitis,cc-by,feralbeetle,inat_open_data,https://www.inaturalist.org/photos/762032543
+inat_M06_762032570,762032570,413986578,M06,Mephitis mephitis,cc-by,feralbeetle,inat_open_data,https://www.inaturalist.org/photos/762032570
+inat_M06_762212162,762212162,414077003,M06,Mephitis mephitis,cc0,brookesullivan3131,inat_open_data,https://www.inaturalist.org/photos/762212162
+inat_M06_762212186,762212186,414077003,M06,Mephitis mephitis,cc0,brookesullivan3131,inat_open_data,https://www.inaturalist.org/photos/762212186
+inat_M06_763605764,763605764,414765363,M06,Mephitis mephitis,cc-by,Derek Spencer,inat_open_data,https://www.inaturalist.org/photos/763605764
+inat_M07_759326362,759326362,412642904,M07,Otospermophilus beecheyi,cc0,ebessler,inat_open_data,https://www.inaturalist.org/photos/759326362
+inat_M07_759343772,759343772,412651209,M07,Otospermophilus beecheyi,cc-by,Bird Brained,inat_open_data,https://www.inaturalist.org/photos/759343772
+inat_M07_759393209,759393209,412679056,M07,Otospermophilus beecheyi,cc0,Emily Langdon-Lassagne,inat_open_data,https://www.inaturalist.org/photos/759393209
+inat_M07_759548725,759548725,412753221,M07,Otospermophilus beecheyi,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/759548725
+inat_M07_760169716,760169716,413094638,M07,Otospermophilus beecheyi,cc-by,nerpanura,inat_open_data,https://www.inaturalist.org/photos/760169716
+inat_M07_761355249,761355249,413648452,M07,Otospermophilus beecheyi,cc-by,nebrooks,inat_open_data,https://www.inaturalist.org/photos/761355249
+inat_M07_761947848,761947848,413945057,M07,Otospermophilus beecheyi,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/761947848
+inat_M07_761947866,761947866,413945057,M07,Otospermophilus beecheyi,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/761947866
+inat_M07_762091692,762091692,414017064,M07,Otospermophilus beecheyi,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/762091692
+inat_M07_762091720,762091720,414017064,M07,Otospermophilus beecheyi,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/762091720
+inat_M07_762091748,762091748,414017064,M07,Otospermophilus beecheyi,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/762091748
+inat_M07_762865019,762865019,414397370,M07,Otospermophilus beecheyi,cc-by,Bob Miller,inat_open_data,https://www.inaturalist.org/photos/762865019
+inat_M07_763326212,763326212,414626885,M07,Otospermophilus beecheyi,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763326212
+inat_M08_763561994,763561994,414744411,M08,Sciurus carolinensis,cc-by,Leonardus Bakker,inat_open_data,https://www.inaturalist.org/photos/763561994
+inat_M08_763562608,763562608,414744687,M08,Sciurus carolinensis,cc-by,Leonardus Bakker,inat_open_data,https://www.inaturalist.org/photos/763562608
+inat_M08_763562637,763562637,414744690,M08,Sciurus carolinensis,cc-by,Leonardus Bakker,inat_open_data,https://www.inaturalist.org/photos/763562637
+inat_M08_763564783,763564783,414752370,M08,Sciurus carolinensis,cc-by,Andrew Skotnicki,inat_open_data,https://www.inaturalist.org/photos/763564783
+inat_M08_763571919,763571919,414748795,M08,Sciurus carolinensis,cc-by,Leonardus Bakker,inat_open_data,https://www.inaturalist.org/photos/763571919
+inat_M08_763572116,763572116,414748883,M08,Sciurus carolinensis,cc-by,Leonardus Bakker,inat_open_data,https://www.inaturalist.org/photos/763572116
+inat_M08_763590608,763590608,414758034,M08,Sciurus carolinensis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763590608
+inat_M08_763590610,763590610,414758034,M08,Sciurus carolinensis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763590610
+inat_M08_763590612,763590612,414758034,M08,Sciurus carolinensis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763590612
+inat_M08_763590657,763590657,414758050,M08,Sciurus carolinensis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763590657
+inat_M08_763590780,763590780,414758116,M08,Sciurus carolinensis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763590780
+inat_M08_763590900,763590900,414758178,M08,Sciurus carolinensis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763590900
+inat_M08_763597171,763597171,414761179,M08,Sciurus carolinensis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763597171
+inat_M08_763597176,763597176,414761179,M08,Sciurus carolinensis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763597176
+inat_M08_763597177,763597177,414761179,M08,Sciurus carolinensis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763597177
+inat_M08_763597707,763597707,414761380,M08,Sciurus carolinensis,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763597707
+inat_M09_757207012,757207012,411593798,M09,Sciurus griseus,cc-by,Melissa Mullins,inat_open_data,https://www.inaturalist.org/photos/757207012
+inat_M09_757351870,757351870,411665877,M09,Sciurus griseus,cc-by,Felicia Gershberg,inat_open_data,https://www.inaturalist.org/photos/757351870
+inat_M09_757351892,757351892,411665877,M09,Sciurus griseus,cc-by,Felicia Gershberg,inat_open_data,https://www.inaturalist.org/photos/757351892
+inat_M09_757351966,757351966,411665877,M09,Sciurus griseus,cc-by,Felicia Gershberg,inat_open_data,https://www.inaturalist.org/photos/757351966
+inat_M09_758475215,758475215,412225743,M09,Sciurus griseus,cc-by,Michele Jones,inat_open_data,https://www.inaturalist.org/photos/758475215
+inat_M09_759902374,759902374,412928817,M09,Sciurus griseus,cc0,Kyle Nessen,inat_open_data,https://www.inaturalist.org/photos/759902374
+inat_M09_760072128,760072128,413012886,M09,Sciurus griseus,cc-by,Devon Bradley,inat_open_data,https://www.inaturalist.org/photos/760072128
+inat_M09_760438361,760438361,413194462,M09,Sciurus griseus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/760438361
+inat_M09_760438391,760438391,413194462,M09,Sciurus griseus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/760438391
+inat_M09_760438430,760438430,413194462,M09,Sciurus griseus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/760438430
+inat_M09_761496129,761496129,413716633,M09,Sciurus griseus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/761496129
+inat_M09_761514679,761514679,413726017,M09,Sciurus griseus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/761514679
+inat_M09_762570673,762570673,414252757,M09,Sciurus griseus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762570673
+inat_M09_762570705,762570705,414252757,M09,Sciurus griseus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762570705
+inat_M09_762570723,762570723,414252757,M09,Sciurus griseus,cc-by,Evan Herman-Tran,inat_open_data,https://www.inaturalist.org/photos/762570723
+inat_M09_762595328,762595328,414264527,M09,Sciurus griseus,cc-by,swabluu,inat_open_data,https://www.inaturalist.org/photos/762595328
+inat_M09_762595331,762595331,414264527,M09,Sciurus griseus,cc-by,swabluu,inat_open_data,https://www.inaturalist.org/photos/762595331
+inat_M09_762595334,762595334,414264527,M09,Sciurus griseus,cc-by,swabluu,inat_open_data,https://www.inaturalist.org/photos/762595334
+inat_M09_762669713,762669713,414300918,M09,Sciurus griseus,cc-by,Jonathan Eisen,inat_open_data,https://www.inaturalist.org/photos/762669713
+inat_M09_762669715,762669715,414300918,M09,Sciurus griseus,cc-by,Jonathan Eisen,inat_open_data,https://www.inaturalist.org/photos/762669715
+inat_M09_762669716,762669716,414300918,M09,Sciurus griseus,cc-by,Jonathan Eisen,inat_open_data,https://www.inaturalist.org/photos/762669716
+inat_M09_763194306,763194306,414560913,M09,Sciurus griseus,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/763194306
+inat_M10_749073085,749073085,407610109,M10,Sylvilagus bachmani,cc-by,Tser,inat_open_data,https://www.inaturalist.org/photos/749073085
+inat_M10_749073113,749073113,407610109,M10,Sylvilagus bachmani,cc-by,Tser,inat_open_data,https://www.inaturalist.org/photos/749073113
+inat_M10_749325401,749325401,407725171,M10,Sylvilagus bachmani,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/749325401
+inat_M10_749325430,749325430,407725171,M10,Sylvilagus bachmani,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/749325430
+inat_M10_750198426,750198426,408154961,M10,Sylvilagus bachmani,cc-by,Cricket Raspet,inat_open_data,https://www.inaturalist.org/photos/750198426
+inat_M10_751829069,751829069,408953921,M10,Sylvilagus bachmani,cc0,Chuck Wilson,inat_open_data,https://www.inaturalist.org/photos/751829069
+inat_M10_752678127,752678127,409370280,M10,Sylvilagus bachmani,cc0,Emily Langdon-Lassagne,inat_open_data,https://www.inaturalist.org/photos/752678127
+inat_M10_752678134,752678134,409370280,M10,Sylvilagus bachmani,cc0,Emily Langdon-Lassagne,inat_open_data,https://www.inaturalist.org/photos/752678134
+inat_M10_752854492,752854492,409454097,M10,Sylvilagus bachmani,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/752854492
+inat_M10_752854524,752854524,409454097,M10,Sylvilagus bachmani,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/752854524
+inat_M10_754767119,754767119,410393709,M10,Sylvilagus bachmani,cc-by,Cricket Raspet,inat_open_data,https://www.inaturalist.org/photos/754767119
+inat_M10_755542580,755542580,410772247,M10,Sylvilagus bachmani,cc-by,Dustin,inat_open_data,https://www.inaturalist.org/photos/755542580
+inat_M10_757366416,757366416,411673300,M10,Sylvilagus bachmani,cc0,Claude Lyneis,inat_open_data,https://www.inaturalist.org/photos/757366416
+inat_M10_757412311,757412311,411695140,M10,Sylvilagus bachmani,cc-by,Barry Langdon-Lassagne,inat_open_data,https://www.inaturalist.org/photos/757412311
+inat_M10_761314655,761314655,413629637,M10,Sylvilagus bachmani,cc-by,Cricket Raspet,inat_open_data,https://www.inaturalist.org/photos/761314655
+inat_M10_763285248,763285248,414606765,M10,Sylvilagus bachmani,cc0,Jodhan Fine,inat_open_data,https://www.inaturalist.org/photos/763285248
+ood_118552_763493263,763493263,414711322,OOD_118552,Felis catus,cc-by,Zaharia Ștefan Theodor,inat_open_data,https://www.inaturalist.org/photos/763493263
+ood_118552_763493264,763493264,414711322,OOD_118552,Felis catus,cc-by,Zaharia Ștefan Theodor,inat_open_data,https://www.inaturalist.org/photos/763493264
+ood_12890_762918750,762918750,414433789,OOD_12890,Catharus guttatus,cc-by,nerpanura,inat_open_data,https://www.inaturalist.org/photos/762918750
+ood_12890_763227212,763227212,414667104,OOD_12890,Catharus guttatus,cc-by,scaup,inat_open_data,https://www.inaturalist.org/photos/763227212
+ood_145088_763569975,763569975,414748005,OOD_145088,Ixoreus naevius,cc-by,Galen Seilis,inat_open_data,https://www.inaturalist.org/photos/763569975
+ood_145088_763570005,763570005,414748005,OOD_145088,Ixoreus naevius,cc-by,Galen Seilis,inat_open_data,https://www.inaturalist.org/photos/763570005
+ood_18236_763589168,763589168,414760303,OOD_18236,Colaptes auratus,cc-by,yongestation,inat_open_data,https://www.inaturalist.org/photos/763589168
+ood_18236_763592819,763592819,414759247,OOD_18236,Colaptes auratus,cc-by,Pam Hardy,inat_open_data,https://www.inaturalist.org/photos/763592819
+ood_42007_762271580,762271580,414104998,OOD_42007,Puma concolor,cc-by,Rick Mandel,inat_open_data,https://www.inaturalist.org/photos/762271580
+ood_42007_762271612,762271612,414104998,OOD_42007,Puma concolor,cc-by,Rick Mandel,inat_open_data,https://www.inaturalist.org/photos/762271612
+ood_42069_763625529,763625529,414775509,OOD_42069,Vulpes vulpes,cc0,Drew Baxter,inat_open_data,https://www.inaturalist.org/photos/763625529
+ood_42069_763627526,763627526,414775509,OOD_42069,Vulpes vulpes,cc0,Drew Baxter,inat_open_data,https://www.inaturalist.org/photos/763627526
+ood_42652_763279014,763279014,414605408,OOD_42652,Didelphis virginiana,cc-by,toad-wife,inat_open_data,https://www.inaturalist.org/photos/763279014
+ood_42652_763590956,763590956,414758201,OOD_42652,Didelphis virginiana,cc-by,Bobby McCabe,inat_open_data,https://www.inaturalist.org/photos/763590956
+ood_43115_762629808,762629808,414282300,OOD_43115,Sylvilagus audubonii,cc0,Craig Felts,inat_open_data,https://www.inaturalist.org/photos/762629808
+ood_43115_762972671,762972671,414450393,OOD_43115,Sylvilagus audubonii,cc-by,David Lonardi,inat_open_data,https://www.inaturalist.org/photos/762972671
+ood_43130_762278697,762278697,414108345,OOD_43130,Lepus californicus,cc0,Ben,inat_open_data,https://www.inaturalist.org/photos/762278697
+ood_43130_762278700,762278700,414108345,OOD_43130,Lepus californicus,cc0,Ben,inat_open_data,https://www.inaturalist.org/photos/762278700
+ood_46020_763553023,763553023,414739627,OOD_46020,Sciurus niger,cc0,aray637,inat_open_data,https://www.inaturalist.org/photos/763553023
+ood_46020_763553027,763553027,414739627,OOD_46020,Sciurus niger,cc0,aray637,inat_open_data,https://www.inaturalist.org/photos/763553027
+ood_46259_762037263,762037263,413989006,OOD_46259,Tamiasciurus douglasii,cc-by,John Baur,inat_open_data,https://www.inaturalist.org/photos/762037263
+ood_46259_763259963,763259963,414594905,OOD_46259,Tamiasciurus douglasii,cc-by,PrimateChallenge,inat_open_data,https://www.inaturalist.org/photos/763259963
+ood_47144_761753422,761753422,413853344,OOD_47144,Canis familiaris,cc-by,Valentin Moser,inat_open_data,https://www.inaturalist.org/photos/761753422
+ood_47144_762738772,762738772,414333487,OOD_47144,Canis familiaris,cc-by,MIMI,inat_open_data,https://www.inaturalist.org/photos/762738772
+ood_506117_762206702,762206702,414074265,OOD_506117,Aphelocoma woodhouseii,cc0,Kevyn Amezcua,inat_open_data,https://www.inaturalist.org/photos/762206702
+ood_506117_762247649,762247649,414094517,OOD_506117,Aphelocoma woodhouseii,cc-by,Kevin Floyd,inat_open_data,https://www.inaturalist.org/photos/762247649
+ood_6359_762577277,762577277,414256114,OOD_6359,Selasphorus sasin,cc0,agoldber,inat_open_data,https://www.inaturalist.org/photos/762577277
+ood_6359_762913894,762913894,414424205,OOD_6359,Selasphorus sasin,cc-by,Gavin Skeen,inat_open_data,https://www.inaturalist.org/photos/762913894
+ood_73044_762974693,762974693,414451282,OOD_73044,Melozone crissalis,cc-by,Irina Mitine,inat_open_data,https://www.inaturalist.org/photos/762974693
+ood_73044_763343863,763343863,414640209,OOD_73044,Melozone crissalis,cc-by,Gavin Skeen,inat_open_data,https://www.inaturalist.org/photos/763343863
+ood_792987_763021660,763021660,414474358,OOD_792987,Dryobates nuttallii,cc-by,Noah Lee,inat_open_data,https://www.inaturalist.org/photos/763021660
+ood_792987_763021672,763021672,414474358,OOD_792987,Dryobates nuttallii,cc-by,Noah Lee,inat_open_data,https://www.inaturalist.org/photos/763021672
+ood_8021_763343382,763343382,414640064,OOD_8021,Corvus brachyrhynchos,cc-by,Gavin Skeen,inat_open_data,https://www.inaturalist.org/photos/763343382
+ood_8021_763555034,763555034,414741366,OOD_8021,Corvus brachyrhynchos,cc-by,Sam Kieschnick,inat_open_data,https://www.inaturalist.org/photos/763555034
+ood_8229_763582325,763582325,414754134,OOD_8229,Cyanocitta cristata,cc-by,Pam Hardy,inat_open_data,https://www.inaturalist.org/photos/763582325
+ood_8229_763586974,763586974,414756291,OOD_8229,Cyanocitta cristata,cc-by,Steven Lamonde,inat_open_data,https://www.inaturalist.org/photos/763586974
+ood_9100_763573976,763573976,414749728,OOD_9100,Melospiza melodia,cc-by,BlueKirby,inat_open_data,https://www.inaturalist.org/photos/763573976
+ood_9100_763619606,763619606,414772111,OOD_9100,Melospiza melodia,cc-by,L. Eaton,inat_open_data,https://www.inaturalist.org/photos/763619606

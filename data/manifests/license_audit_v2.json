@@ -1,0 +1,23 @@
+{
+  "audit_timestamp": "2026-11-14T23:10:29.111266+00:00",
+  "allowed_photo_licenses": [
+    "cc-by",
+    "cc0"
+  ],
+  "detector_only_licenses": [
+    "cdla-permissive",
+    "cdla-permissive-1.0"
+  ],
+  "allow_research_only": false,
+  "for_detector": false,
+  "approved_count": 490,
+  "rejected_count": 0,
+  "counts_by_license": {
+    "cc0": 107,
+    "cc-by": 383
+  },
+  "counts_by_source": {
+    "inat_open_data": 490
+  },
+  "rejected_records": []
+}
