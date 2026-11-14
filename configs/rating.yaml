@@ -1,9 +1,11 @@
-model_version: "species-v1.0"
-calibration_version: "temp-v1"
-rating_version: "quality-v1"
+model_version: "species-v2.0"
+detector_version: "md6-apa-rtdetr-e@apache2.0"
+crop_version: "crop-v1"
+calibration_version: "temp-v2"
+rating_version: "quality-v2"
 argon_model_version: "gemini-4-argon"
 
-# V1 Photographic Quality Rubric Weights (must sum to 1.0)
+# Photographic Quality Rubric Weights (computed on the detector crop; must sum to 1.0)
 quality_weights:
   sharpness: 0.30
   visibility: 0.25
@@ -26,10 +28,12 @@ composite_weights:
   quality: 0.65
   confidence: 0.35
 
-# Unknown-species / Out-of-Distribution Rejection Gate
+# Unknown-species / Out-of-Distribution Rejection Gate (tuned in Milestone 10, §8.2)
 acceptance_gate:
-  max_prob_threshold: 0.80
+  max_prob_threshold: 0.78
   margin_threshold: 0.15
-  energy_threshold: -1.50
+  energy_threshold: -1.20
   coarse_group_agreement_min_sum: 0.75
   false_accept_rate_target: 0.05
+  tau_det: 0.25
+  owlv2_uncertain_margin: 0.10
