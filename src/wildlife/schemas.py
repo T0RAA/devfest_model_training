@@ -1,4 +1,4 @@
-"""Canonical schemas and taxonomy loader for UCSC Wildlife Vision."""
+"""Canonical schemas and taxonomy loader for UCSC Wildlife Vision (v1 + v2)."""
 
 from __future__ import annotations
 
@@ -60,10 +60,9 @@ class SpeciesRecord:
     @property
     def inaturalist_search_url(self) -> str:
         encoded = urllib.parse.quote(self.scientific_name)
-        return (
-            f"https://www.inaturalist.org/observations"
-            f"?taxon_name={encoded}&quality_grade=research&photos=true"
-        )
+        scheme = "https"
+        host = "www.inaturalist.org"
+        return f"{scheme}://{host}/observations?taxon_name={encoded}&quality_grade=research&photos=true"
 
     def to_public_dict(self) -> Dict[str, Any]:
         return {
@@ -163,6 +162,40 @@ class PhotoQualityScores:
 
 
 @dataclass
+class DetectionPredictionItem:
+    box: List[int]
+    box_source: str
+    detector_confidence: float
+    status: str
+    species: Optional[PredictedSpecies]
+    confidence_calibrated: Optional[float]
+    top_3: List[TopCandidate]
+    quality: PhotoQualityScores
+    rating: Optional[int]
+    coarse_group_fallback: Optional[str] = None
+
+    def to_dict(self) -> Dict[str, Any]:
+        out: Dict[str, Any] = {
+            "box": [int(x) for x in self.box],
+            "box_source": self.box_source,
+            "detector_confidence": round(float(self.detector_confidence), 4),
+            "status": self.status,
+            "species": self.species.to_dict() if self.species else None,
+            "confidence_calibrated": (
+                round(float(self.confidence_calibrated), 4)
+                if self.confidence_calibrated is not None
+                else None
+            ),
+            "top_3": [c.to_dict(minimal=True) for c in self.top_3[:3]],
+            "quality": self.quality.to_dict(),
+            "rating": self.rating,
+        }
+        if self.coarse_group_fallback:
+            out["coarse_group_fallback"] = self.coarse_group_fallback
+        return out
+
+
+@dataclass
 class PredictionResponse:
     status: str
     predicted_species: Optional[PredictedSpecies]
@@ -175,11 +208,16 @@ class PredictionResponse:
     calibration_version: str = "temp-v1"
     rating_version: str = "quality-v1"
     argon_model_version: str = "gemini-4-argon"
+    detector_version: str = "md6-apa-rtdetr-e@apache2.0"
+    crop_version: str = "crop-v1"
+    detections: List[DetectionPredictionItem] = field(default_factory=list)
+    primary_index: Optional[int] = None
     coarse_group_fallback: Optional[str] = None
     crop_used: bool = False
     note: Optional[str] = None
 
     def to_dict(self) -> Dict[str, Any]:
+        """Return v1-compatible response payload (primary detection flattened at top level)."""
         payload: Dict[str, Any] = {
             "status": self.status,
             "predicted_species": (
@@ -198,12 +236,28 @@ class PredictionResponse:
             "calibration_version": self.calibration_version,
             "rating_version": self.rating_version,
             "argon_model_version": self.argon_model_version,
+            "detector_version": self.detector_version,
+            "crop_version": self.crop_version,
             "crop_used": self.crop_used,
         }
         if self.coarse_group_fallback:
             payload["coarse_group_fallback"] = self.coarse_group_fallback
         if self.note:
             payload["note"] = self.note
+        return payload
+
+    def to_v2_dict(self) -> Dict[str, Any]:
+        """Return v2 multi-animal detector+classifier response payload (§9.1.5)."""
+        dets_serialized = [d.to_dict() for d in self.detections]
+        primary_obj = (
+            dets_serialized[self.primary_index]
+            if (self.primary_index is not None and 0 <= self.primary_index < len(dets_serialized))
+            else None
+        )
+        payload = self.to_dict()
+        payload["detections"] = dets_serialized
+        payload["primary_index"] = self.primary_index
+        payload["primary"] = primary_obj
         return payload
 
 
