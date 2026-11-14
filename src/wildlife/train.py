@@ -134,7 +134,10 @@ def _extract_bioclip2_embeddings_and_t0(
             pil_img = Image.fromarray(rgb)
             for _v in range(views):
                 batch_imgs.append(preprocess_fn(pil_img))
-                batch_meta.append((class_idx, oid, row))
+                view_row = dict(row)
+                if views > 1:
+                    view_row["image_id"] = f"{row['image_id']}__v{_v}"
+                batch_meta.append((class_idx, oid, view_row))
                 if len(batch_imgs) >= batch_size:
                     _flush()
         _flush()
