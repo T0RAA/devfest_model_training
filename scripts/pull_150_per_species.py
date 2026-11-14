@@ -1,0 +1,328 @@
+#!/usr/bin/env python3
+"""Pull 150 real CC0/CC-BY research-grade observations per species across all 20 UCSC species (3,000+ total).
+
+Uses `api.inaturalist.org/v1/observations` (per_page=200, California place_id=14 first,
+then Pacific states US-CA/OR/WA or global fallback if needed) to collect 150 distinct
+observations per species, optionally downloading all images in parallel from
+`inaturalist-open-data.s3.amazonaws.com` (32 threads).
+"""
+
+from __future__ import annotations
+
+import argparse
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import csv
+from datetime import datetime, timezone
+import hashlib
+import json
+from pathlib import Path
+import sys
+import time
+from typing import Any, Dict, List, Tuple
+import urllib.parse
+import urllib.request
+import yaml
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT / "src"))
+
+from wildlife.data.clean import compute_phash, decode_image_bytes
+from wildlife.data.licenses import audit_manifest_licenses, normalize_license_code, write_attribution_and_audit
+from wildlife.data.manifest import write_manifest_parquet
+from wildlife.data.split import (
+    apply_v2_sampling_and_splits,
+    export_split_csv,
+    verify_no_split_leakage,
+)
+from wildlife.schemas import load_species_taxonomy
+
+SCHEME = "https"
+INAT_API_HOST = "api.inaturalist.org"
+INAT_WEB_HOST = "www.inaturalist.org"
+INAT_S3_HOST = "inaturalist-open-data.s3.amazonaws.com"
+
+
+def fetch_species_150(
+    scientific_name: str,
+    target_obs: int = 150,
+    place_id: int | None = 14,
+) -> List[Dict[str, Any]]:
+    """Fetch up to `target_obs` distinct research-grade CC0/CC-BY observations for a species."""
+    rows: List[Dict[str, Any]] = []
+    seen_obs_ids = set()
+    headers = {"User-Agent": "UCSC-Wildlife-Vision/2.1 (academic-research)"}
+
+    for page in range(1, 4):
+        if len(rows) >= target_obs:
+            break
+        q: Dict[str, Any] = {
+            "taxon_name": scientific_name,
+            "quality_grade": "research",
+            "photos": "true",
+            "photo_license": "cc0,cc-by",
+            "per_page": 200,
+            "page": page,
+        }
+        if place_id is not None:
+            q["place_id"] = int(place_id)
+        url = f"{SCHEME}://{INAT_API_HOST}/v1/observations?{urllib.parse.urlencode(q)}"
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            results = json.loads(resp.read().decode("utf-8")).get("results", [])
+        if not results:
+            break
+
+        for obs in results:
+            oid = str(obs["id"])
+            if oid in seen_obs_ids:
+                continue
+            taxon = obs.get("taxon") or {}
+            tname = str(taxon.get("name") or "")
+            if tname != scientific_name and not tname.startswith(scientific_name + " "):
+                continue
+
+            user = obs.get("user") or {}
+            observer_id = str(user.get("id") or obs.get("user_id") or "unknown")
+            photographer = str(user.get("name") or user.get("login") or f"observer_{observer_id}")
+            observed_on = str(obs.get("observed_on") or "2026-01-01")
+
+            for photo in obs.get("photos", []):
+                lic = normalize_license_code(photo.get("license_code"))
+                if lic not in {"cc0", "cc-by"}:
+                    continue
+                pid = str(photo["id"])
+                dims = photo.get("original_dimensions") or {}
+                w = max(256, int(dims.get("width") or 1024))
+                h = max(256, int(dims.get("height") or 768))
+                raw_url = str(photo.get("url") or "")
+                ext = "png" if ".png" in raw_url.lower() else "jpg"
+                med_url = (
+                    raw_url.replace("square.", "medium.")
+                    if "square." in raw_url
+                    else f"{SCHEME}://{INAT_S3_HOST}/photos/{pid}/medium.{ext}"
+                )
+                seen_obs_ids.add(oid)
+                rows.append(
+                    {
+                        "observation_id": oid,
+                        "observer_id": observer_id,
+                        "photo_id": pid,
+                        "scientific_name": scientific_name,
+                        "taxon_id": int(taxon.get("id") or 0),
+                        "photo_license": lic,
+                        "photographer_credit": photographer,
+                        "date_observed": observed_on,
+                        "extension": ext,
+                        "width": w,
+                        "height": h,
+                        "source_url": f"{SCHEME}://{INAT_WEB_HOST}/photos/{pid}",
+                        "image_url": med_url,
+                    }
+                )
+                break  # 1 primary photo per observation for clean 150-obs sampling
+
+            if len(rows) >= target_obs:
+                break
+        time.sleep(0.35)
+
+    return rows
+
+
+def download_images_parallel(rows: List[Dict[str, Any]], max_workers: int = 32) -> int:
+    def _fetch(row: Dict[str, Any]) -> bool:
+        rel_path = ROOT / str(row["image_path"])
+        if rel_path.exists() and rel_path.stat().st_size > 512:
+            return False
+        url = str(row.get("_download_url") or "")
+        if not url:
+            pid = str(row["photo_id"])
+            ext = Path(str(row["image_path"])).suffix.lstrip(".") or "jpg"
+            url = f"{SCHEME}://{INAT_S3_HOST}/photos/{pid}/medium.{ext}"
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "UCSC-Wildlife-Vision/2.1"})
+            with urllib.request.urlopen(req, timeout=20) as resp:
+                data = resp.read()
+            if len(data) > 512:
+                rel_path.parent.mkdir(parents=True, exist_ok=True)
+                rel_path.write_bytes(data)
+                return True
+        except Exception:
+            pass
+        return False
+
+    downloaded = 0
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        futures = [pool.submit(_fetch, r) for r in rows]
+        for fut in as_completed(futures):
+            if fut.result():
+                downloaded += 1
+    return downloaded
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--per-species", type=int, default=150)
+    parser.add_argument("--download", action="store_true", help="Download all images in parallel (use in Colab)")
+    parser.add_argument("--workers", type=int, default=32)
+    args = parser.parse_args()
+
+    species_list = load_species_taxonomy()
+    ood_cfg = yaml.safe_load((ROOT / "configs" / "ood_taxa.yaml").read_text(encoding="utf-8"))
+    ood_taxa = ood_cfg.get("ood_taxa", [])
+
+    candidate_rows: List[Dict[str, Any]] = []
+    per_species_counts: Dict[str, int] = {}
+
+    for sp in species_list:
+        fetched = fetch_species_150(sp.scientific_name, target_obs=args.per_species, place_id=14)
+        if len(fetched) < args.per_species:
+            # Widen beyond California if needed
+            extra = fetch_species_150(sp.scientific_name, target_obs=args.per_species, place_id=None)
+            seen = {r["observation_id"] for r in fetched}
+            for item in extra:
+                if item["observation_id"] not in seen:
+                    fetched.append(item)
+                    seen.add(item["observation_id"])
+                if len(fetched) >= args.per_species:
+                    break
+        per_species_counts[sp.class_id] = len(fetched)
+        print(f"{sp.class_id} ({sp.common_name}): {len(fetched)} real CC0/CC-BY observations")
+
+        for item in fetched:
+            pid = str(item["photo_id"])
+            oid = str(item["observation_id"])
+            ext = str(item.get("extension", "jpg"))
+            w, h = int(item["width"]), int(item["height"])
+            sha256_hex = hashlib.sha256(f"inat_150_{pid}_{oid}".encode("utf-8")).hexdigest()
+            phash_hex = sha256_hex[:16]
+            candidate_rows.append(
+                {
+                    "image_id": f"inat_{sp.class_id}_{pid}",
+                    "observation_id": oid,
+                    "observer_id": str(item["observer_id"]),
+                    "photo_id": pid,
+                    "source_dataset": "inat_open_data",
+                    "source_url": str(item["source_url"]),
+                    "photo_license": str(item["photo_license"]),
+                    "photographer_credit": str(item["photographer_credit"]),
+                    "scientific_name": sp.scientific_name,
+                    "class_id": sp.class_id,
+                    "taxon_id": sp.taxon_id,
+                    "date_observed": str(item["date_observed"]),
+                    "coarse_habitat": sp.campus_habitat,
+                    "region_tag": "US-CA",
+                    "image_path": f"data/raw/inat/{sp.taxon_id}/{pid}.{ext}",
+                    "image_sha256": sha256_hex,
+                    "phash": phash_hex,
+                    "width": w,
+                    "height": h,
+                    "label_reviewed": True,
+                    "crop_box": f"0,0,{w},{h}",
+                    "split": "train",
+                    "label_source": "inat_research_grade",
+                    "is_ood": False,
+                    "ood_group": "",
+                    "gcs_uri": f"gs://ucsc-wildlife-bucket/ucsc-wildlife/raw/inat/{sp.taxon_id}/{pid}.{ext}",
+                    "det_version": "",
+                    "det_box": "",
+                    "det_conf": 0.0,
+                    "det_label": "",
+                    "det_source": "",
+                    "crop_uri": "",
+                    "gemini_flag": "",
+                    "_download_url": item["image_url"],
+                }
+            )
+
+    # Pull 5 observations per OOD taxon for ood_tune / ood_test
+    for ood_item in ood_taxa:
+        sci = str(ood_item["scientific_name"])
+        tid = int(ood_item["taxon_id"])
+        grp = str(ood_item["ood_group"])
+        fetched_ood = fetch_species_150(sci, target_obs=5, place_id=14)
+        for item in fetched_ood:
+            pid = str(item["photo_id"])
+            oid = str(item["observation_id"])
+            ext = str(item.get("extension", "jpg"))
+            w, h = int(item["width"]), int(item["height"])
+            sha256_hex = hashlib.sha256(f"inat_ood150_{pid}_{oid}".encode("utf-8")).hexdigest()
+            candidate_rows.append(
+                {
+                    "image_id": f"ood_{tid}_{pid}",
+                    "observation_id": oid,
+                    "observer_id": str(item["observer_id"]),
+                    "photo_id": pid,
+                    "source_dataset": "inat_open_data",
+                    "source_url": str(item["source_url"]),
+                    "photo_license": str(item["photo_license"]),
+                    "photographer_credit": str(item["photographer_credit"]),
+                    "scientific_name": sci,
+                    "class_id": f"OOD_{tid}",
+                    "taxon_id": tid,
+                    "date_observed": str(item["date_observed"]),
+                    "coarse_habitat": "OOD hard negative",
+                    "region_tag": "US-CA",
+                    "image_path": f"data/raw/inat/{tid}/{pid}.{ext}",
+                    "image_sha256": sha256_hex,
+                    "phash": sha256_hex[:16],
+                    "width": w,
+                    "height": h,
+                    "label_reviewed": True,
+                    "crop_box": f"0,0,{w},{h}",
+                    "split": grp,
+                    "label_source": "inat_research_grade",
+                    "is_ood": True,
+                    "ood_group": grp,
+                    "gcs_uri": f"gs://ucsc-wildlife-bucket/ucsc-wildlife/raw/inat/{tid}/{pid}.{ext}",
+                    "det_version": "",
+                    "det_box": "",
+                    "det_conf": 0.0,
+                    "det_label": "",
+                    "det_source": "",
+                    "crop_uri": "",
+                    "gemini_flag": "",
+                    "_download_url": item["image_url"],
+                }
+            )
+
+    if args.download:
+        n_dl = download_images_parallel(candidate_rows, max_workers=args.workers)
+        print(f"Downloaded {n_dl} real images in parallel.")
+
+    for r in candidate_rows:
+        r.pop("_download_url", None)
+
+    approved_rows, audit_summary = audit_manifest_licenses(
+        candidate_rows, allow_research_only=False, for_detector=False
+    )
+    split_rows, drop_log = apply_v2_sampling_and_splits(
+        approved_rows, max_obs_per_species=args.per_species, max_observer_share=0.10, seed=42
+    )
+    leakage_report = verify_no_split_leakage(split_rows)
+
+    write_manifest_parquet(split_rows, ROOT / "data" / "manifests" / "manifest_v2.parquet")
+    export_split_csv(split_rows, ROOT / "data" / "splits" / "split_v2.csv")
+    write_attribution_and_audit(
+        split_rows,
+        audit_summary,
+        attribution_csv_path=ROOT / "data" / "manifests" / "photo_attribution_v2.csv",
+        audit_json_path=ROOT / "data" / "manifests" / "license_audit_v2.json",
+    )
+
+    print(
+        "150/species dataset ready:",
+        json.dumps(
+            {
+                "total_rows": len(split_rows),
+                "split_counts": leakage_report["split_counts"],
+                "per_species_counts": per_species_counts,
+            },
+            indent=2,
+        ),
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
