@@ -119,7 +119,7 @@ class WildlifeClassifier:
 
         # Deterministic two-layer parameters for the NumPy backend (and fast fallback)
         rng = np.random.RandomState(self.seed)
-        self.in_dim = 144
+        self.in_dim = 132
         self.hidden_dim = 96
         self.W_enc = (rng.randn(self.in_dim, self.hidden_dim) * np.sqrt(2.0 / self.in_dim)).astype(
             np.float32
