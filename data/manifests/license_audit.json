@@ -1,0 +1,18 @@
+{
+  "audit_timestamp": "2026-11-14T20:51:19.695287+00:00",
+  "allowed_licenses": [
+    "cc-by",
+    "cc0"
+  ],
+  "allow_research_only": false,
+  "approved_count": 140,
+  "rejected_count": 0,
+  "counts_by_license": {
+    "cc0": 80,
+    "cc-by": 60
+  },
+  "counts_by_source": {
+    "synthetic_fixture": 140
+  },
+  "rejected_records": []
+}
