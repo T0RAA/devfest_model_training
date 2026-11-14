@@ -1,0 +1,32 @@
+detector_version: "md6-apa-rtdetr-e@apache2.0"
+crop_version: "crop-v1"
+
+primary_detector:
+  model_name: "MDV6-apa-rtdetr-e"
+  architecture: "RT-DETR"
+  license: "Apache-2.0"
+  mit_speed_alternative: "MDV6-mit-yolov9-c"
+  prohibited_agpl_variants:
+    - "MDV6-yolov9-c"
+    - "MDV6-yolov9-e"
+    - "MDV6-yolov10-n"
+    - "MDV6-yolov10-x"
+
+fallback_detector:
+  enabled: true
+  model_name: "google/owlv2-base-patch16-ensemble"
+  license: "Apache-2.0"
+  text_queries:
+    - "a photo of a bird"
+    - "a photo of a mammal"
+  min_confidence: 0.18
+  uncertain_cap_margin: 0.10
+
+thresholds:
+  tau_det: 0.25
+  batch_export_min_conf: 0.05
+  nms_iou: 0.50
+  max_boxes: 5
+  non_animal_fpr_target: 0.05
+  overall_recall_gate: 0.97
+  per_species_recall_gate: 0.90
