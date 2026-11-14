@@ -1,0 +1,83 @@
+allowed_photo_licenses:
+  - "cc0"
+  - "cc-by"
+
+disallowed_commercial_licenses:
+  - "cc-by-nc"
+  - "cc-by-nc-sa"
+  - "cc-by-nc-nd"
+  - "cc-by-nd"
+  - "cc-by-sa"
+  - "all-rights-reserved"
+  - "copyright"
+  - "research-only-cub"
+
+inaturalist_api:
+  host: "api.inaturalist.org"
+  api_version: "v1"
+  web_host: "www.inaturalist.org"
+  user_agent: "UCSC-Wildlife-Vision/1.0 (academic project)"
+  requests_per_second: 1.0
+  max_requests_per_day: 10000
+  max_media_gb_per_hour: 5.0
+  max_media_gb_per_day: 24.0
+  ucsc_checklist_id: "6494-UC-Santa-Cruz-Campus-Natural-Reserve-Check-List"
+
+sources:
+  ucsc_mammal_inventory:
+    domain: "ucsccampusreserve.ucsc.edu"
+    path: "/species-habitats/mammals/"
+    purpose: "Validate mammal class list; not a training-image set"
+    commercial_training_allowed: false
+  ucsc_bird_inventory:
+    domain: "ucsccampusreserve.ucsc.edu"
+    path: "/species-habitats/birds/"
+    purpose: "Validate bird class list; not a training-image set"
+    commercial_training_allowed: false
+  ucsc_inaturalist_checklist:
+    domain: "www.inaturalist.org"
+    path: "/check_lists/6494-UC-Santa-Cruz-Campus-Natural-Reserve-Check-List"
+    purpose: "Cross-check taxonomy and local observations; not a frequency ranking"
+    commercial_training_allowed: false
+  inaturalist_observations:
+    domain: "www.inaturalist.org"
+    path: "/observations"
+    purpose: "Small pilot / campus-specific sample; obey rate limits and individual photo license"
+    commercial_training_allowed: true
+  inaturalist_open_data:
+    s3_bucket: "inaturalist-open-data"
+    purpose: "Primary scalable image dataset; filter by scientific name, region, and photo license"
+    commercial_training_allowed: true
+  cub_200_2011:
+    dataset_id: "cub_200_2011"
+    purpose: "Optional research-only supplementary bird audit; excluded from commercial release"
+    commercial_training_allowed: false
+  ucsc_field_dataset:
+    local_dir: "data/field_holdout"
+    purpose: "Independent UCSC campus test set with documented photographer permission"
+    commercial_training_allowed: true
+
+quantity_targets:
+  smoke_test:
+    min_obs_per_species: 20
+    max_obs_per_species: 40
+    total_across_20_species: [400, 800]
+  baseline:
+    min_obs_per_species: 150
+    max_obs_per_species: 300
+    total_across_20_species: [3000, 6000]
+  improved:
+    min_obs_per_species: 400
+    max_obs_per_species: 800
+    total_across_20_species: [8000, 16000]
+  ucsc_final_holdout:
+    min_obs_per_species: 30
+    total_target: 600
+
+split_policy:
+  train_ratio: 0.70
+  validation_ratio: 0.15
+  test_ratio: 0.15
+  group_by: "observation_id"
+  separate_observers_when_feasible: true
+  max_phash_hamming_across_splits: 4

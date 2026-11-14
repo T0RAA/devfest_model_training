@@ -1,0 +1,41 @@
+seed: 42
+multi_seeds: [42, 1337, 2026]
+num_classes: 20
+model: efficientnet_b0
+pretrained_weights: "EfficientNet_B0_Weights.DEFAULT"
+image_size: 224
+batch_size: 32
+head_epochs: 4
+finetune_epochs: 24
+head_lr: 0.001
+backbone_lr: 0.00003
+weight_decay: 0.0001
+label_smoothing: 0.05
+optimizer: adamw
+scheduler: cosine
+metric_for_best: val_macro_f1
+patience: 5
+mixed_precision: true
+num_workers: 2
+class_weighting: "none"  # options: none, balanced_loss, balanced_sampler
+
+augmentation:
+  random_resized_crop_scale: [0.7, 1.0]
+  horizontal_flip_prob: 0.5
+  max_rotation_deg: 12.0
+  brightness_jitter: 0.15
+  contrast_jitter: 0.15
+  saturation_jitter: 0.10
+
+normalization:
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+
+cloud:
+  gcs_bucket: ""
+  gcs_prefix: "ucsc-wildlife"
+  vertex_region: "us-west1"
+  vertex_machine_type: "n1-standard-4"
+  vertex_accelerator_type: "NVIDIA_TESLA_T4"
+  vertex_accelerator_count: 1
+  argon_model_id: "gemini-4-argon"

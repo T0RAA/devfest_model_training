@@ -1,0 +1,42 @@
+# Raw and processed image datasets (never redistribute in Git)
+data/raw/
+data/processed/
+data/field_holdout/
+data/ood/
+
+# Model checkpoints and exported weights
+*.ckpt
+*.pt
+*.pth
+*.onnx
+checkpoints/
+runs/
+/content/
+
+# Credentials and secrets
+.env
+.env.*
+!.env.example
+*credentials*.json
+*service-account*.json
+*key*.json
+gcloud-key.json
+
+# Python / build / test artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+src/*.egg-info/
+build/
+dist/
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# macOS / IDE
+.DS_Store
+.idea/
+.vscode/

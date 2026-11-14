@@ -1,0 +1,241 @@
+version: "1.0.0"
+title: "UCSC Wildlife 20 Starter Species"
+status: "starter_documented_set"
+taxonomy_freeze_date: "2026-11-14"
+supported_groups:
+  - large_mammal
+  - small_mammal
+  - bird
+
+species:
+  - class_id: "M01"
+    index: 0
+    common_name: "Black-tailed deer"
+    scientific_name: "Odocoileus hemionus"
+    subspecies_filter: "Odocoileus hemionus columbianus"
+    group: "large_mammal"
+    inventory_group: "Large"
+    taxon_id: 42158
+    aliases:
+      - "Columbian black-tailed deer"
+      - "Mule deer (coastal black-tailed form)"
+      - "Odocoileus hemionus columbianus"
+    campus_habitat: "Meadows, woodland edges"
+    primary_source: "iNaturalist licensed observations, local photos"
+    notes: "Filter geographically to coastal California and verify coastal black-tailed phenotype."
+
+  - class_id: "M02"
+    index: 1
+    common_name: "Coyote"
+    scientific_name: "Canis latrans"
+    group: "large_mammal"
+    inventory_group: "Large"
+    taxon_id: 42051
+    aliases: []
+    campus_habitat: "Open meadows, woodland"
+    primary_source: "iNaturalist, licensed camera-trap data"
+    hard_negatives: ["Canis familiaris"]
+
+  - class_id: "M03"
+    index: 2
+    common_name: "Bobcat"
+    scientific_name: "Lynx rufus"
+    group: "large_mammal"
+    inventory_group: "Large"
+    taxon_id: 41976
+    aliases: []
+    campus_habitat: "Forest edges, meadows"
+    primary_source: "iNaturalist, licensed camera-trap data"
+    hard_negatives: ["Felis catus"]
+
+  - class_id: "M04"
+    index: 3
+    common_name: "Gray fox"
+    scientific_name: "Urocyon cinereoargenteus"
+    group: "large_mammal"
+    inventory_group: "Large"
+    taxon_id: 42076
+    aliases: ["Common gray fox"]
+    campus_habitat: "Woodlands, mixed forest"
+    primary_source: "iNaturalist, licensed camera-trap data"
+
+  - class_id: "M05"
+    index: 4
+    common_name: "Northern raccoon"
+    scientific_name: "Procyon lotor"
+    group: "small_mammal"
+    inventory_group: "Small/medium"
+    taxon_id: 41663
+    aliases: ["Raccoon", "Common raccoon"]
+    campus_habitat: "Riparian, disturbed and wooded areas"
+    primary_source: "iNaturalist, licensed camera-trap data"
+
+  - class_id: "M06"
+    index: 5
+    common_name: "Striped skunk"
+    scientific_name: "Mephitis mephitis"
+    group: "small_mammal"
+    inventory_group: "Small/medium"
+    taxon_id: 41880
+    aliases: []
+    campus_habitat: "Multiple habitats"
+    primary_source: "iNaturalist, licensed camera-trap data"
+
+  - class_id: "M07"
+    index: 6
+    common_name: "California ground squirrel"
+    scientific_name: "Otospermophilus beecheyi"
+    group: "small_mammal"
+    inventory_group: "Small"
+    taxon_id: 179919
+    aliases: ["Spermophilus beecheyi", "Beechey ground squirrel"]
+    campus_habitat: "Grasslands, agricultural edges"
+    primary_source: "iNaturalist, campus photos"
+
+  - class_id: "M08"
+    index: 7
+    common_name: "Eastern gray squirrel"
+    scientific_name: "Sciurus carolinensis"
+    group: "small_mammal"
+    inventory_group: "Small"
+    taxon_id: 46017
+    aliases: []
+    campus_habitat: "Developed and forested zones"
+    primary_source: "iNaturalist, campus photos"
+    confusion_pair: "M09"
+
+  - class_id: "M09"
+    index: 8
+    common_name: "Western gray squirrel"
+    scientific_name: "Sciurus griseus"
+    group: "small_mammal"
+    inventory_group: "Small"
+    taxon_id: 46020
+    aliases: []
+    campus_habitat: "Forested areas"
+    primary_source: "iNaturalist, campus photos"
+    confusion_pair: "M08"
+
+  - class_id: "M10"
+    index: 9
+    common_name: "Brush rabbit"
+    scientific_name: "Sylvilagus bachmani"
+    group: "small_mammal"
+    inventory_group: "Small"
+    taxon_id: 43114
+    aliases: ["Western brush rabbit"]
+    campus_habitat: "Chaparral, meadow edges"
+    primary_source: "iNaturalist, campus photos"
+
+  - class_id: "B01"
+    index: 10
+    common_name: "Wild turkey"
+    scientific_name: "Meleagris gallopavo"
+    group: "bird"
+    inventory_group: "Bird"
+    taxon_id: 906
+    aliases: []
+    campus_habitat: "Mixed woodland, open edges"
+    primary_source: "iNaturalist, optional CUB audit"
+
+  - class_id: "B02"
+    index: 11
+    common_name: "California quail"
+    scientific_name: "Callipepla californica"
+    group: "bird"
+    inventory_group: "Bird"
+    taxon_id: 1409
+    aliases: ["California valley quail"]
+    campus_habitat: "Arboretum, open edges"
+    primary_source: "iNaturalist, optional CUB audit"
+
+  - class_id: "B03"
+    index: 12
+    common_name: "Steller's jay"
+    scientific_name: "Cyanocitta stelleri"
+    group: "bird"
+    inventory_group: "Bird"
+    taxon_id: 8229
+    aliases: ["Stellers jay"]
+    campus_habitat: "Redwood and mixed forest"
+    primary_source: "iNaturalist, optional CUB audit"
+    confusion_pair: "B04"
+
+  - class_id: "B04"
+    index: 13
+    common_name: "California scrub-jay"
+    scientific_name: "Aphelocoma californica"
+    group: "bird"
+    inventory_group: "Bird"
+    taxon_id: 509665
+    aliases: ["Western scrub-jay", "Western Scrub-Jay", "California scrub jay"]
+    campus_habitat: "Chaparral and woodland edge"
+    primary_source: "iNaturalist; inspect older Western scrub-jay labels"
+    confusion_pair: "B03"
+
+  - class_id: "B05"
+    index: 14
+    common_name: "Common raven"
+    scientific_name: "Corvus corax"
+    group: "bird"
+    inventory_group: "Bird"
+    taxon_id: 8010
+    aliases: ["Northern raven"]
+    campus_habitat: "Forest and grassland"
+    primary_source: "iNaturalist, optional CUB audit"
+    hard_negatives: ["Corvus brachyrhynchos"]
+
+  - class_id: "B06"
+    index: 15
+    common_name: "Acorn woodpecker"
+    scientific_name: "Melanerpes formicivorus"
+    group: "bird"
+    inventory_group: "Bird"
+    taxon_id: 18195
+    aliases: []
+    campus_habitat: "Oak and mixed woodland"
+    primary_source: "iNaturalist, optional CUB audit"
+
+  - class_id: "B07"
+    index: 16
+    common_name: "Anna's hummingbird"
+    scientific_name: "Calypte anna"
+    group: "bird"
+    inventory_group: "Bird"
+    taxon_id: 6317
+    aliases: ["Annas hummingbird"]
+    campus_habitat: "Flowering shrubs and edges"
+    primary_source: "iNaturalist, optional CUB audit"
+
+  - class_id: "B08"
+    index: 17
+    common_name: "American robin"
+    scientific_name: "Turdus migratorius"
+    group: "bird"
+    inventory_group: "Bird"
+    taxon_id: 12727
+    aliases: []
+    campus_habitat: "Forest edges and lawns"
+    primary_source: "iNaturalist, optional CUB audit"
+
+  - class_id: "B09"
+    index: 18
+    common_name: "Dark-eyed junco"
+    scientific_name: "Junco hyemalis"
+    group: "bird"
+    inventory_group: "Bird"
+    taxon_id: 9235
+    aliases: ["Oregon junco"]
+    campus_habitat: "Redwood and mixed forest"
+    primary_source: "iNaturalist, optional CUB audit"
+
+  - class_id: "B10"
+    index: 19
+    common_name: "Spotted towhee"
+    scientific_name: "Pipilo maculatus"
+    group: "bird"
+    inventory_group: "Bird"
+    taxon_id: 9373
+    aliases: ["Rufous-sided towhee (western)"]
+    campus_habitat: "Chaparral and understory"
+    primary_source: "iNaturalist, optional CUB audit"
