@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useReducer, type ReactNode } from 'react'
 import seed from './data/seed.json'
 import { sampleDetection, seeded, wrap } from './mock'
-import type { Comment, Post } from './types'
+import type { Comment, Post, PredictionV2 } from './types'
 
 interface SeedPhoto {
   id: string
@@ -14,19 +14,24 @@ interface SeedPhoto {
   lng: number
   place: string
   observer: string
+  width?: number
+  height?: number
+  /** real /v2/predict output recorded by web/scripts/record_seed_predictions.py */
+  prediction?: PredictionV2
 }
 
-const NOMINAL = 1000 // seed boxes are expressed on a 1000×1000 canvas and drawn as percentages
+const NOMINAL = 1000 // fallback sample boxes are expressed on a 1000×1000 canvas
 
 function seedPosts(): Post[] {
   return (seed as SeedPhoto[]).map((s) => {
     const rand = seeded(s.id)
     const author = s.observer
+    const real = s.prediction && s.width && s.height
     return {
       id: s.id,
       image: s.image,
-      width: NOMINAL,
-      height: NOMINAL,
+      width: real ? s.width! : NOMINAL,
+      height: real ? s.height! : NOMINAL,
       author,
       attribution: s.attribution,
       source: s.source,
@@ -34,11 +39,11 @@ function seedPosts(): Post[] {
       place: s.place,
       lat: s.lat,
       lng: s.lng,
-      prediction: wrap(sampleDetection(s.class_id, NOMINAL, NOMINAL, s.id, true)),
+      prediction: real ? s.prediction! : wrap(sampleDetection(s.class_id, NOMINAL, NOMINAL, s.id, true)),
       likes: Math.floor(rand() * 60),
       liked: false,
       comments: [],
-      sample: true,
+      sample: !real,
     }
   })
 }
@@ -66,13 +71,16 @@ function load(): Saved {
   return { mine: [], liked: [], comments: {} }
 }
 
+/** The user's own posts; everything else is a seed post rebuilt from seed.json on load. */
+const isMine = (p: Pick<Post, 'id'>) => p.id.startsWith('mine-')
+
 function init(): Post[] {
   const saved = load()
-  return [...saved.mine, ...seedPosts()].map((p) => ({
+  return [...saved.mine.filter(isMine), ...seedPosts()].map((p) => ({
     ...p,
     liked: saved.liked.includes(p.id),
-    likes: p.likes + (saved.liked.includes(p.id) && p.sample ? 1 : 0),
-    comments: p.sample ? saved.comments[p.id] ?? [] : p.comments,
+    likes: p.likes + (saved.liked.includes(p.id) && !isMine(p) ? 1 : 0),
+    comments: isMine(p) ? p.comments : saved.comments[p.id] ?? [],
   }))
 }
 
@@ -93,9 +101,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [posts, dispatch] = useReducer(reducer, undefined, init)
   useEffect(() => {
     const saved: Saved = {
-      mine: posts.filter((p) => !p.sample),
+      mine: posts.filter(isMine),
       liked: posts.filter((p) => p.liked).map((p) => p.id),
-      comments: Object.fromEntries(posts.filter((p) => p.sample && p.comments.length).map((p) => [p.id, p.comments])),
+      comments: Object.fromEntries(posts.filter((p) => !isMine(p) && p.comments.length).map((p) => [p.id, p.comments])),
     }
     try {
       localStorage.setItem(KEY, JSON.stringify(saved))

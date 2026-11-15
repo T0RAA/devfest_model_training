@@ -23,10 +23,10 @@ export function Rankings() {
 
   return (
     <div className="mx-auto max-w-3xl">
-      <PageTitle sub="Ranked by photo rating: 65% photo quality and 35% how confidently the model identified the animal. Uncertain IDs aren’t ranked.">Top rankings</PageTitle>
+      <PageTitle sub="Ranked by photo rating: 65% photo quality and 35% how confidently the model identified the animal. Uncertain IDs aren’t ranked.">Best photos</PageTitle>
       <div className="mb-6 flex flex-wrap gap-2" role="radiogroup" aria-label="Filter by group">
         {filters.map((f) => (
-          <button key={f} role="radio" aria-checked={filter === f} onClick={() => setFilter(f)} className="rounded-full border border-line px-4 py-1.5 text-[14px] text-canopy-soft aria-checked:border-canopy aria-checked:bg-canopy aria-checked:text-fog">
+          <button key={f} role="radio" aria-checked={filter === f} onClick={() => setFilter(f)} className="min-h-9 rounded-full border border-line px-3.5 text-[14px] text-canopy-soft transition-colors hover:border-canopy-soft aria-checked:border-canopy aria-checked:bg-canopy aria-checked:font-bold aria-checked:text-fog">
             {f === 'all' ? 'Everything' : GROUP_LABEL[f]}
           </button>
         ))}
@@ -34,19 +34,19 @@ export function Rankings() {
       <ol className="space-y-3">
         {ranked.map(({ p, d }, i) => (
           <li key={p.id}>
-            <a href={href.post(p.id)} className="flex items-center gap-4 rounded-2xl bg-white p-3 pr-5 hover:ring-2 hover:ring-lichen">
-              <span className={`w-10 shrink-0 text-center font-display font-extrabold tabular-nums ${i < 3 ? 'text-4xl text-redwood' : 'text-2xl text-lichen'}`}>{i + 1}</span>
-              <img src={p.image} alt="" loading="lazy" className={`shrink-0 rounded-xl object-cover ${i === 0 ? 'size-28' : 'size-20'}`} />
+            <a href={href.post(p.id)} className="flex items-center gap-3 rounded-[18px] bg-paper p-3 pr-4 sm:gap-4 sm:pr-5 shadow-[0_1px_0_var(--color-line)] hover:ring-2 hover:ring-lichen">
+              <span className={`t-num w-8 shrink-0 text-center sm:w-10 ${i < 3 ? 'text-[34px] text-redwood' : 'text-[24px] text-canopy-soft'}`}>{i + 1}</span>
+              <img src={p.image} alt="" loading="lazy" className={`shrink-0 rounded-xl object-cover ${i === 0 ? 'size-16 sm:size-28' : 'size-16 sm:size-20'}`} />
               <div className="min-w-0 flex-1">
-                <p className="truncate font-display text-lg font-bold">{labelOf(d!)}</p>
-                <p className="truncate text-[14px] text-canopy-soft">{p.author}</p>
+                <p className="truncate t-heading">{labelOf(d!)}</p>
+                <p className="t-meta truncate">{p.author}, {p.place}</p>
               </div>
               <RatingBadge rating={d!.rating} />
             </a>
           </li>
         ))}
       </ol>
-      {posts.some((p) => p.sample) && <p className="mt-6 text-[13px] text-canopy-soft">Ratings on demo posts are sample values until the model API is connected.</p>}
+      {posts.some((p) => p.sample) && <p className="t-meta mt-6">Ratings on demo posts are sample values.</p>}
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import { predict, PredictError, sendFeedback, type Source } from '../api'
-import { DetectionPhoto, labelOf, PageTitle, QualityBars, RatingBadge, TopThree } from '../components'
+import { DetectionPhoto, GROUP_COLOR, GroupChip, groupOf, Icon, labelOf, PageTitle, QualityBars, RatingBadge, TopThree } from '../components'
 import { BY_ID, GROUP_LABEL, SPECIES } from '../data/species'
 import { href } from '../router'
 import { useStore } from '../store'
@@ -60,37 +60,35 @@ export function Identify() {
       {phase.k === 'pick' && (
         <>
           <PageTitle sub="Take or choose a photo. The detector finds each animal, then the classifier names it from the 20 campus species.">Identify an animal</PageTitle>
-          <label htmlFor="photo" className="group grid aspect-[4/3] max-h-[60vh] w-full cursor-pointer place-items-center rounded-3xl border-2 border-dashed border-lichen bg-white text-center hover:border-canopy">
+          <label htmlFor="photo" className="group grid aspect-[4/3] max-h-[60vh] w-full cursor-pointer place-items-center rounded-3xl border-2 border-dashed border-lichen bg-paper text-center transition-colors hover:border-canopy">
             <span>
               <span className="bracket mx-auto mb-5 block size-24 [--c:var(--color-canopy)] [--l:32%] group-hover:[--c:var(--color-redwood)]" />
-              <span className="block font-display text-2xl font-bold">Choose a photo</span>
+              <span className="block t-title">Choose a photo</span>
               <span className="mt-1 block text-canopy-soft">or take one with your camera</span>
             </span>
           </label>
-          <p className="mt-4 text-[13px] text-canopy-soft">Location data is removed from your photo before anything is sent.</p>
+          <p className="t-meta mt-4">Location data is removed from your photo before anything is sent.</p>
         </>
       )}
 
       {phase.k === 'working' && (
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
-          <div className="relative overflow-hidden rounded-2xl">
-            <img src={phase.shot.url} alt="Your photo" className="w-full opacity-70" />
-            <div className="absolute inset-0 grid place-items-center">
-              <span className="bracket size-1/2 animate-pulse" />
-            </div>
+          <div className="scan relative overflow-hidden rounded-2xl bg-canopy">
+            <img src={phase.shot.url} alt="Your photo" className="w-full opacity-80" />
+            <span className="bracket absolute inset-[2%]" data-status="uncertain" />
           </div>
           <div aria-live="polite">
-            <p className="font-display text-3xl font-extrabold">Looking for animals…</p>
-            <p className="mt-2 text-canopy-soft">Finding each animal, then naming it.</p>
+            <p className="t-title">Looking for animals</p>
+            <p className="mt-2 text-canopy-soft">MegaDetector finds each animal, then BioCLIP 2 names it.</p>
           </div>
         </div>
       )}
 
       {phase.k === 'error' && (
         <div className="mx-auto max-w-md py-16 text-center">
-          <p className="font-display text-2xl font-bold">That photo didn’t work.</p>
+          <p className="t-title">That photo didn’t work.</p>
           <p className="mt-2 text-canopy-soft">{phase.message}</p>
-          <label htmlFor="photo" className="mt-6 inline-block cursor-pointer rounded-full bg-redwood px-6 py-3 font-bold text-white">Choose another photo</label>
+          <label htmlFor="photo" className="mt-6 inline-flex min-h-12 cursor-pointer items-center rounded-xl bg-redwood px-6 font-bold text-white">Choose another photo</label>
         </div>
       )}
 
@@ -103,7 +101,7 @@ function Result({ shot, result, source }: { shot: Shot; result: PredictionV2; so
   const { dispatch } = useStore()
   const [sel, setSel] = useState(result.primary_index ?? 0)
   const [dets, setDets] = useState(result.detections)
-  const [correcting, setCorrecting] = useState(false)
+  const [correcting, setCorrecting] = useState<string | false>(false)
   const [spot, setSpot] = useState(SPOTS[0].name)
   const d: Detection | undefined = dets[sel]
   const pred = { ...result, detections: dets, primary: dets[result.primary_index ?? 0] ?? null }
@@ -123,9 +121,9 @@ function Result({ shot, result, source }: { shot: Shot; result: PredictionV2; so
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
         <img src={shot.url} alt="Your photo" className="w-full rounded-2xl" />
         <div>
-          <h1 className="font-display text-4xl font-extrabold">No animal found</h1>
+          <h1 className="t-display">No animal found</h1>
           <p className="mt-3 max-w-[48ch] text-canopy-soft">The detector couldn’t find a wild animal here. People, pets and cars are skipped on purpose. If there is an animal, try a closer photo where it fills more of the frame.</p>
-          <label htmlFor="photo" className="mt-6 inline-block cursor-pointer rounded-full bg-redwood px-6 py-3 font-bold text-white">Try another photo</label>
+          <label htmlFor="photo" className="mt-6 inline-flex min-h-12 cursor-pointer items-center rounded-xl bg-redwood px-6 font-bold text-white">Try another photo</label>
         </div>
       </div>
     )
@@ -147,27 +145,57 @@ function Result({ shot, result, source }: { shot: Shot; result: PredictionV2; so
         <div className="space-y-6">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h1 className="font-display text-[38px] leading-none font-extrabold tracking-tight">{labelOf(d)}</h1>
+              <h1 className="t-display">{labelOf(d)}</h1>
               {d.species && d.status === 'identified' && <p className="mt-1 text-canopy-soft italic">{d.species.scientific_name}</p>}
             </div>
             <RatingBadge rating={d.rating} size="lg" />
           </div>
+          <div className="flex flex-wrap gap-2 text-[13px]">
+            <span className="inline-flex h-7 items-center gap-1.5 rounded-full bg-mist px-2.5">{Icon.check('size-3.5')}Found {dets.length} {dets.length === 1 ? 'animal' : 'animals'}</span>
+            <span className={`inline-flex h-7 items-center gap-1.5 rounded-full px-2.5 ${d.status === 'identified' ? 'bg-slug font-bold' : 'border border-dashed border-canopy-soft bg-paper'}`}>
+              {d.status === 'identified' ? `Named with ${Math.round((d.confidence_calibrated ?? 0) * 100)}% confidence` : d.status === 'uncertain' ? 'Species check: low confidence' : 'Not a campus species'}
+            </span>
+            <GroupChip group={groupOf(d)} />
+          </div>
 
           {d.status === 'uncertain' && (
-            <p className="text-[15px]">
-              The model isn’t confident enough to name the species{d.coarse_group_fallback ? `, but it’s very likely a ${GROUP_LABEL[d.coarse_group_fallback as Group].toLowerCase().replace(/s$/, '')}` : ''}. A sharper, closer photo usually helps, or pick the species yourself.
-            </p>
+            <p>The model’s best guess is under its 78% bar, so it won’t name it outright. Pick the right one below to help it learn, or post it as is.</p>
           )}
-          {d.status === 'unsupported' && <p className="text-[15px]">This looks like an animal, but not one of the 20 campus species the model knows.</p>}
+          {d.status === 'unsupported' && <p>This looks like an animal, but not one of the 20 campus species the model knows.</p>}
 
-          {d.top_3.length > 0 && (
+          {d.top_3.length > 0 && d.status === 'uncertain' && (
             <section>
-              <h2 className="mb-3 font-display text-lg font-bold">Top matches</h2>
-              <TopThree d={d} />
+              <h2 className="mb-3 t-heading">Which one is it?</h2>
+              <ul className="space-y-2">
+                {d.top_3.map((c, i) => {
+                  const sp = BY_ID[c.class_id]
+                  const pct = Math.round(c.probability * 100)
+                  return (
+                    <li key={c.class_id}>
+                      <button
+                        onClick={() => setCorrecting(c.class_id)}
+                        className={`grid min-h-11 w-full grid-cols-[1fr_96px_40px] items-center gap-3 rounded-xl bg-white px-3 text-left transition-colors hover:border-canopy ${i === 0 ? 'border-2 border-canopy font-bold' : 'border border-line'}`}
+                      >
+                        {sp?.common_name ?? c.class_id}
+                        <span className="h-2 overflow-hidden rounded-full bg-mist">
+                          <span className={`fill-bar block h-full rounded-full ${sp ? GROUP_COLOR[sp.group].dot : 'bg-lichen'}`} style={{ width: `${Math.max(pct, 2)}%` }} />
+                        </span>
+                        <span className="text-right tabular-nums">{pct}%</span>
+                      </button>
+                    </li>
+                  )
+                })}
+              </ul>
+            </section>
+          )}
+          {d.top_3.length > 0 && d.status !== 'uncertain' && (
+            <section>
+              <h2 className="mb-3 t-heading">Top matches</h2>
+              <TopThree d={d} animate />
             </section>
           )}
           <section>
-            <h2 className="mb-3 font-display text-lg font-bold">Photo quality {d.quality.overall}</h2>
+            <h2 className="mb-3 t-heading">Photo quality {d.quality.overall}</h2>
             <QualityBars q={d.quality} />
           </section>
 
@@ -181,15 +209,16 @@ function Result({ shot, result, source }: { shot: Shot; result: PredictionV2; so
               </select>
             </label>
             <div className="flex flex-wrap gap-3">
-              <button onClick={post} className="rounded-full bg-redwood px-6 py-3 font-bold text-white hover:bg-redwood-dark">Post sighting</button>
-              <button onClick={() => setCorrecting(true)} className="rounded-full border border-canopy px-6 py-3 font-bold">{d.status === 'identified' ? 'That’s not right' : 'Pick the species'}</button>
+              <button onClick={post} className="min-h-12 rounded-xl bg-redwood px-6 font-bold text-white transition-colors hover:bg-redwood-dark">Post sighting</button>
+              <button onClick={() => setCorrecting('')} className="min-h-12 rounded-xl border border-canopy px-6 font-bold">{d.status === 'identified' ? 'That’s not right' : 'None of these'}</button>
             </div>
           </div>
         </div>
       )}
 
-      {correcting && d && (
+      {correcting !== false && d && (
         <CorrectDialog
+          initial={correcting}
           current={d.species?.class_id ?? null}
           onClose={() => setCorrecting(false)}
           onPick={(classId) => {
@@ -203,9 +232,9 @@ function Result({ shot, result, source }: { shot: Shot; result: PredictionV2; so
   )
 }
 
-function CorrectDialog({ current, onClose, onPick }: { current: string | null; onClose: () => void; onPick: (classId: string) => void }) {
+function CorrectDialog({ initial, current, onClose, onPick }: { initial: string; current: string | null; onClose: () => void; onPick: (classId: string) => void }) {
   const ref = useRef<HTMLDialogElement>(null)
-  const [choice, setChoice] = useState<string>('')
+  const [choice, setChoice] = useState<string>(initial)
   const [share, setShare] = useState(true)
   const [sent, setSent] = useState<null | boolean>(null)
   useEffect(() => {
@@ -222,8 +251,8 @@ function CorrectDialog({ current, onClose, onPick }: { current: string | null; o
   return (
     <dialog ref={ref} onClose={onClose} className="m-auto w-[min(92vw,460px)] rounded-3xl bg-fog p-0 text-canopy backdrop:bg-canopy/60">
       <div className="p-6">
-        <h2 className="font-display text-2xl font-bold">What is it?</h2>
-        <p className="mt-1 text-[15px] text-canopy-soft">Your answer replaces the model’s label on this post.</p>
+        <h2 className="t-title">What is it?</h2>
+        <p className="mt-1 text-canopy-soft">Your answer replaces the model’s label on this post.</p>
         <label className="mt-4 block">
           <span className="sr-only">Species</span>
           <select value={choice} onChange={(e) => setChoice(e.target.value)} className="w-full rounded-xl border border-line bg-white px-3 py-3">
@@ -246,8 +275,8 @@ function CorrectDialog({ current, onClose, onPick }: { current: string | null; o
         </label>
         {sent === false && <p className="mt-3 text-[14px] text-redwood">The review service isn’t reachable, so the correction was only saved on this post.</p>}
         <div className="mt-6 flex justify-end gap-3">
-          <button onClick={onClose} className="rounded-full px-5 py-2.5 font-bold text-canopy-soft">Cancel</button>
-          <button onClick={save} disabled={!choice} className="rounded-full bg-canopy px-5 py-2.5 font-bold text-fog disabled:opacity-40">Save correction</button>
+          <button onClick={onClose} className="min-h-11 rounded-xl px-5 font-bold text-canopy-soft">Cancel</button>
+          <button onClick={save} disabled={!choice} className="min-h-11 rounded-xl bg-canopy px-5 font-bold text-fog disabled:opacity-40">Save correction</button>
         </div>
       </div>
     </dialog>

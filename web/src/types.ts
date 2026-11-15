@@ -51,6 +51,8 @@ export interface PredictionV2 {
   model_version: string
   explanation?: string
   note?: string | null
+  /** set on seed posts: the date their prediction was recorded from the live API */
+  recorded_on?: string
 }
 
 export interface Comment {
