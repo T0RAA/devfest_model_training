@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --color-fog: #eef1ee;
+  --color-canopy: #1e3b2f;
+  --color-canopy-soft: #4a6357;
+  --color-redwood: #6b2e1f;
+  --color-redwood-dark: #4f2016;
+  --color-lichen: #a9b8a3;
+  --color-line: #d5ddd3;
+  --color-slug: #f2c230;
+
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  background: var(--color-fog);
+  color: var(--color-canopy);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-slug);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* The detector box: field-guide corner brackets instead of a full rectangle. */
+.bracket {
+  --c: var(--color-slug);
+  --w: 3px;
+  --l: 22%;
+  background:
+    linear-gradient(var(--c), var(--c)) top left / var(--l) var(--w),
+    linear-gradient(var(--c), var(--c)) top left / var(--w) var(--l),
+    linear-gradient(var(--c), var(--c)) top right / var(--l) var(--w),
+    linear-gradient(var(--c), var(--c)) top right / var(--w) var(--l),
+    linear-gradient(var(--c), var(--c)) bottom left / var(--l) var(--w),
+    linear-gradient(var(--c), var(--c)) bottom left / var(--w) var(--l),
+    linear-gradient(var(--c), var(--c)) bottom right / var(--l) var(--w),
+    linear-gradient(var(--c), var(--c)) bottom right / var(--w) var(--l);
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 0 2px rgb(0 0 0 / 0.55));
+}
+.bracket[data-status="uncertain"] {
+  --c: #ffffff;
+}
+
+@keyframes lock-on {
+  from {
+    transform: scale(1.18);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.lock-on {
+  animation: lock-on 420ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.leaflet-container {
+  font-family: var(--font-sans);
+}
