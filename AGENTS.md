@@ -53,3 +53,39 @@ and merges. These rules keep the two from colliding.
 9. **Never commit secrets** (`.env`, tokens, OAuth client files, personal
    exports). Never send email, post, submit forms or contact anyone on Tora's
    behalf.
+
+<!-- agent-baton:start -->
+## Usage limits, model routing and token efficiency (agent-baton)
+
+Claude Code and Codex share this repo and work off each other's usage limits. On Tora's Mac,
+`~/.agent-baton/bin/baton` tracks both tools' 5-hour and weekly limits from their status lines.
+
+- **Check before you start.** Codex: run `~/.agent-baton/bin/baton brief --for codex` at the start of
+  each task. Claude gets the same lines from a hook. If `baton` isn't installed (a cloud
+  session, for example), skip the check and say so once.
+- **go:** work normally. When both tools are on go, split the work: Claude takes planning, review and
+  hard problems; Codex takes the `C-` queue in `CODEX_HANDOFF.md`.
+- **wind-down** (5-hour window ≥ 70%, or weekly use ahead of an even pace): finish the current
+  task, then take only small tasks. Leave larger ones for the other tool in the PR description, as a
+  `C-`-style task with a done-when check.
+- **out** (5-hour ≥ 80% or weekly ≥ 95%): start nothing new. Push the branch, write a resume note in the
+  draft PR (what's done, the next step, how to verify it), and stop.
+- **Taking over:** pick up another tool's work only when its resume note hands it over, and never
+  push to its branch.
+
+**Subagents.** Use the cheapest one that can do the job, and escalate only after a real failure.
+On wind-down, drop one tier.
+
+| Work | Agent | Claude | Codex |
+|---|---|---|---|
+| Find code, files, call sites, log lines | `scout` | haiku / low | gpt-6-luna / low |
+| Well-specified edits, tests, small fixes, docs | `builder` | sonnet / medium | gpt-6.2-sol / medium |
+| Design, unknown-cause bugs, security, final review | `deep-reviewer` | opus / high | gpt-6.2-astra / high |
+
+Run independent subagents in parallel, with each one owning distinct files.
+
+**Token efficiency.** Search before reading, and read line ranges, not whole files. Don't re-read
+what's already in context. Hand searches across many files to `scout` and keep only its answer.
+Keep command output short (`| tail`, `-q`). Run only the affected tests until the final gate. Keep
+replies to results and decisions.
+<!-- agent-baton:end -->
